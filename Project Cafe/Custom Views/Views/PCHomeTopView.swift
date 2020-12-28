@@ -12,6 +12,7 @@ class PCHomeTopView: UIView {
     var backgroundImageView: UIImageView!
     var mainLabel: PCTitleLabel!
     var knowButton: PCButton!
+    var searchBar: UISearchBar!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,6 +21,7 @@ class PCHomeTopView: UIView {
         configureBackgroundImageView()
         configureMainLabel()
         configureKnowButton()
+        configureSearchBar()
     }
     
     required init?(coder: NSCoder) {
@@ -47,11 +49,13 @@ class PCHomeTopView: UIView {
         mainLabel.text = "找到適合你的咖啡廳"
         mainLabel.numberOfLines = 2
         addSubview(mainLabel)
+        //updates the layout for the next run loop
         setNeedsLayout()
+        //updates all layouts right now
         layoutIfNeeded()
         NSLayoutConstraint.activate([
             mainLabel.topAnchor.constraint(equalTo: topAnchor, constant: self.frame.height * 0.25),
-            mainLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 50),
+            mainLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             mainLabel.widthAnchor.constraint(equalToConstant: self.frame.width * 0.9),
             mainLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -self.frame.height * 0.5)
         ])
@@ -71,6 +75,22 @@ class PCHomeTopView: UIView {
     }
     
     func configureSearchBar() {
+        searchBar = UISearchBar()
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.placeholder = "搜尋店名"
+        searchBar.searchBarStyle = .minimal
+        searchBar.searchTextField.backgroundColor = .systemBackground
+        searchBar.layer.shadowColor = UIColor.black.cgColor
+        searchBar.layer.shadowOpacity = 0.25
+        searchBar.layer.shadowOffset = CGSize(width: 5, height: 5)
+        searchBar.layer.shadowRadius = 10
+        addSubview(searchBar)
         
+        NSLayoutConstraint.activate([
+            searchBar.centerXAnchor.constraint(equalTo: centerXAnchor),
+            searchBar.widthAnchor.constraint(equalToConstant: self.frame.width * 1.3),
+            searchBar.heightAnchor.constraint(equalToConstant: 60),
+            searchBar.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 30)
+        ])
     }
 }

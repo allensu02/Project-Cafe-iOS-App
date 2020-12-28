@@ -27,6 +27,7 @@
 		A3D56C6B2590A66B00E939B0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D56C6A2590A66B00E939B0 /* Constants.swift */; };
 		A3D56C712590ACFC00E939B0 /* PCButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D56C702590ACFC00E939B0 /* PCButton.swift */; };
 		A3E337152598DD380096E74F /* PCHomeTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E337142598DD380096E74F /* PCHomeTopView.swift */; };
+		A3EF6B8D259A0FBF00415952 /* PCHomeScreenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EF6B8C259A0FBF00415952 /* PCHomeScreenButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		A3D56C6A2590A66B00E939B0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A3D56C702590ACFC00E939B0 /* PCButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCButton.swift; sourceTree = "<group>"; };
 		A3E337142598DD380096E74F /* PCHomeTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCHomeTopView.swift; sourceTree = "<group>"; };
+		A3EF6B8C259A0FBF00415952 /* PCHomeScreenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCHomeScreenButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				A3D56C702590ACFC00E939B0 /* PCButton.swift */,
+				A3EF6B8C259A0FBF00415952 /* PCHomeScreenButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				A3D56C512590A24E00E939B0 /* AppDelegate.swift in Sources */,
 				A31EAD81259224EC00A72021 /* PCSecondaryLabel.swift in Sources */,
 				A35CC26F25935B2700542907 /* APIKeys.swift in Sources */,
+				A3EF6B8D259A0FBF00415952 /* PCHomeScreenButton.swift in Sources */,
 				A31E4DBA25936AB70013BF02 /* Cafe.swift in Sources */,
 				A3D56C532590A24E00E939B0 /* SceneDelegate.swift in Sources */,
 				A3D56C6B2590A66B00E939B0 /* Constants.swift in Sources */,
