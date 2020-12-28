@@ -22,16 +22,17 @@ class PCButton: UIButton {
         self.init(frame: .zero)
         self.backgroundColor = backgroundColor
         self.setTitle(title, for: .normal)
+        configure()
     }
     
     private func configure() {
         layer.cornerRadius = 10
-        titleLabel?.font = Fonts.merriweather
+        titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
         titleLabel?.textAlignment = .center
         setTitleColor(.white, for: .normal)
         translatesAutoresizingMaskIntoConstraints = false
-        layer.borderColor = Colors.defaultBrown.cgColor
-        layer.borderWidth = 5
+        layer.borderColor = UIColor.white.cgColor
+        layer.borderWidth = 1
     }
     
     func set(backgroundColor: UIColor, title: String) {

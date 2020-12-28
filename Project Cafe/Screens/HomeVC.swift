@@ -9,10 +9,7 @@ import UIKit
 
 class HomeVC: UIViewController {
 
-    var nearMeButton: PCButton!
-    var filterButton: PCButton!
-    var logo: UIImageView!
-    
+    var topView: PCHomeTopView!
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -21,52 +18,30 @@ class HomeVC: UIViewController {
     func configureUI() {
         navigationController?.navigationBar.isHidden = true
         view.backgroundColor = .systemBackground
-        configureLogo()
-        configureNearMeButton()
-        configureFilterButton()
+        configureTopView()
     }
     
-    func configureLogo() {
-        logo = UIImageView(image: Images.defaultLogo)
-        logo.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(logo)
-        
+    func configureTopView() {
+        topView = PCHomeTopView()
+        view.addSubview(topView)
+//        PCHomeTopView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height * 0.4))
         NSLayoutConstraint.activate([
-            logo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logo.heightAnchor.constraint(equalToConstant: 250),
-            logo.widthAnchor.constraint(equalToConstant: 250),
-            logo.topAnchor.constraint(equalTo: view.topAnchor, constant: 200)
+            topView.topAnchor.constraint(equalTo: view.topAnchor),
+            topView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            topView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            topView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -view.frame.height*0.6)
         ])
     }
     
-    func configureNearMeButton () {
-        nearMeButton = PCButton(backgroundColor: Colors.defaultBrown, title: "Cafes Near Me")
-        view.addSubview(nearMeButton)
-        nearMeButton.addTarget(self, action: #selector(goToResults), for: .touchUpInside)
-
-        NSLayoutConstraint.activate([
-            nearMeButton.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 100),
-            nearMeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 70),
-            nearMeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
-            nearMeButton.widthAnchor.constraint(equalToConstant: 50)
-        ])
-    }
     
-    func configureFilterButton () {
-        filterButton = PCButton(backgroundColor: Colors.defaultBrown, title: "Apply Filters")
-        view.addSubview(filterButton)
-        filterButton.addTarget(self, action: #selector(goToFilters), for: .touchUpInside)
-        NSLayoutConstraint.activate([
-            filterButton.topAnchor.constraint(equalTo: nearMeButton.bottomAnchor, constant: 100),
-            filterButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 70),
-            filterButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
-            filterButton.widthAnchor.constraint(equalToConstant: 70)
-        ])
-    }
     
     @objc func goToFilters() {
         let filtersVC = FiltersVC()
-        navigationController?.pushViewController(filtersVC, animated: true)
+        //navigationController?.pushViewController(filtersVC, animated: true)
+        NetworkManager.shared.getWeather(city: "taipei") { (cafe) in
+            print("cafe: \(cafe.weather[0].main)")
+            self.presentPCAlertOnMainThread(title: "Test", message: "testtttt", buttonTitle: "Ok")
+        }
     }
 
     @objc func goToResults() {
