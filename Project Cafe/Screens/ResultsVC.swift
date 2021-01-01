@@ -19,6 +19,8 @@ class ResultsVC: UIViewController {
     func configureUI() {
         navigationController?.navigationBar.isHidden = false
         view.backgroundColor = .systemBackground
+        navigationController?.navigationBar.prefersLargeTitles = true
+        title = "編輯類別"
         configureLabel()
     }
     

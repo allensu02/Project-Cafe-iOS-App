@@ -13,15 +13,16 @@ class HomeVC: UIViewController {
     var buttonOne: PCHomeScreenButton!
     var buttonTwo: PCHomeScreenButton!
     var stackView: UIStackView!
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
     }
     
     func configureUI() {
-        navigationController?.navigationBar.isHidden = true
         view.backgroundColor = .systemBackground
-        
         configureTopView()
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -42,8 +43,10 @@ class HomeVC: UIViewController {
     func configureButton() {
         buttonOne = PCHomeScreenButton(icon: UIImage(systemName: "mappin.and.ellipse")!)
         buttonOne.buttonLabel.text = "離我最近"
+        buttonOne.addTarget(self, action: #selector(goToResults), for: .touchUpInside)
         buttonTwo = PCHomeScreenButton(icon: UIImage(systemName: "text.badge.plus")!)
-        buttonTwo.buttonLabel.text = " 偏好篩選"
+        buttonTwo.buttonLabel.text = "偏好篩選"
+        buttonTwo.addTarget(self, action: #selector(goToFilters), for: .touchUpInside)
         stackView = UIStackView(arrangedSubviews: [buttonOne, buttonTwo])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
@@ -62,15 +65,16 @@ class HomeVC: UIViewController {
     
     @objc func goToFilters() {
         let filtersVC = FiltersVC()
-        //navigationController?.pushViewController(filtersVC, animated: true)
-        NetworkManager.shared.getWeather(city: "taipei") { (cafe) in
-            print("cafe: \(cafe.weather[0].main)")
-            self.presentPCAlertOnMainThread(title: "Test", message: "testtttt", buttonTitle: "Ok")
-        }
+        navigationController?.pushViewController(filtersVC, animated: true)
+//        NetworkManager.shared.getWeather(city: "taipei") { (cafe) in
+//            print("cafe: \(cafe.weather[0].main)")
+//            self.presentPCAlertOnMainThread(title: "Test", message: "testtttt", buttonTitle: "Ok")
+//        }
     }
 
     @objc func goToResults() {
         let resultsVC = ResultsVC()
+        print("hello")
         navigationController?.pushViewController(resultsVC, animated: true)
     }
     

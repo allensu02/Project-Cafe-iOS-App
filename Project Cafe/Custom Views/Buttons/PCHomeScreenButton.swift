@@ -30,7 +30,7 @@ class PCHomeScreenButton: UIButton {
     }
     
     func configure() {
-        layer.cornerRadius = 10
+        layer.cornerRadius = 20
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = Colors.defaultBrown
         configureStackView()
@@ -38,32 +38,30 @@ class PCHomeScreenButton: UIButton {
     
     func configureStackView() {
         iconImageView = UIImageView(image: myImage)
+        iconImageView.contentMode = .scaleAspectFit
         iconImageView.tintColor = .white
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
         
         buttonLabel = PCTitleLabel(textAlignment: .center, fontSize: 20)
         buttonLabel.textColor = .white
-        buttonLabel.minimumScaleFactor = 0.7
+        buttonLabel.minimumScaleFactor = 0.5
         stackView = UIStackView(arrangedSubviews: [iconImageView, buttonLabel])
         stackView.distribution = .fill
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = 10
+        stackView.isUserInteractionEnabled = false
         //updates the layout for the next run loop
         setNeedsLayout()
         //updates all layouts right now
         layoutIfNeeded()
+    
         addSubview(stackView)
-        print(self.frame.width)
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor, constant: 20),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 40),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
         ])
     }
-
-    
-    
-
 }
