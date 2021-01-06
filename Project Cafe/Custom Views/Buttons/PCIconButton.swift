@@ -14,6 +14,8 @@ class PCIconButton: UIButton {
     var text: String!
     var label: PCTitleLabel!
     var isTapped: Bool!
+    weak var filter: Filter?
+    weak var category: Category?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,6 +36,7 @@ class PCIconButton: UIButton {
         translatesAutoresizingMaskIntoConstraints = false
     }
     
+    
     func configure() {
         configureIconView()
         configureLabel()
@@ -44,19 +47,16 @@ class PCIconButton: UIButton {
         setTitleColor(.red, for: .highlighted)
     }
     
-    func changeColor(otherColor: UIColor) {
-        if (isTapped) {
-            layer.backgroundColor = UIColor.white.cgColor
-            label?.textColor = Colors.defaultBrown
-            iconView.tintColor = Colors.defaultBrown
-            isTapped = false
-        } else {
-            layer.backgroundColor = otherColor.cgColor
-            label?.textColor = .white
-            iconView.tintColor = .white
-            isTapped = true
-        }
-        
+    func addColor() {
+        layer.backgroundColor = Colors.pcOrange.cgColor
+        label?.textColor = .white
+        iconView.tintColor = .white
+    }
+    
+    func removeColor() {
+        layer.backgroundColor = UIColor.white.cgColor
+        label?.textColor = Colors.defaultBrown
+        iconView.tintColor = Colors.defaultBrown
     }
     
     func configureIconView() {
@@ -86,5 +86,7 @@ class PCIconButton: UIButton {
         ])
         
     }
+    
+    
 
 }

@@ -46,7 +46,7 @@ class HomeVC: UIViewController {
         buttonOne.addTarget(self, action: #selector(goToResults), for: .touchUpInside)
         buttonTwo = PCHomeScreenButton(icon: UIImage(systemName: "text.badge.plus")!)
         buttonTwo.buttonLabel.text = "偏好篩選"
-        buttonTwo.addTarget(self, action: #selector(goToFilters), for: .touchUpInside)
+        buttonTwo.addTarget(self, action: #selector(goToFilterStrings), for: .touchUpInside)
         stackView = UIStackView(arrangedSubviews: [buttonOne, buttonTwo])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
@@ -63,9 +63,9 @@ class HomeVC: UIViewController {
     
     
     
-    @objc func goToFilters() {
-        let filtersVC = FiltersVC()
-        navigationController?.pushViewController(filtersVC, animated: true)
+    @objc func goToFilterStrings() {
+        let filterVC = FilterVC()
+        navigationController?.pushViewController(filterVC, animated: true)
 //        NetworkManager.shared.getWeather(city: "taipei") { (cafe) in
 //            print("cafe: \(cafe.weather[0].main)")
 //            self.presentPCAlertOnMainThread(title: "Test", message: "testtttt", buttonTitle: "Ok")

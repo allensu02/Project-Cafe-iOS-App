@@ -20,6 +20,15 @@ class PCSectionView: UIView {
     var button2: PCIconButton!
     var button3: PCIconButton!
     var button4: PCIconButton!
+    var button5: PCIconButton!
+    var button6: PCIconButton!
+    var button7: PCIconButton!
+    var button8: PCIconButton!
+    var button9: PCIconButton!
+    var button10: PCIconButton!
+
+    var leftSV: UIView!
+    var rightSV: UIView!
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -74,14 +83,8 @@ class PCSectionView: UIView {
     }
 
     func configureStackView() {
-        var leftSV: UIView!
-        var rightSV: UIView!
         
-        setButtons()
-        iconButtons = [button1, button2, button3, button4]
-        leftSV = createSV(buttons: [button1, button2])
-        rightSV = createSV(buttons: [button3, button4])
-        
+        setSV()        
         buttonSV = UIStackView(arrangedSubviews: [leftSV, rightSV])
         buttonSV.translatesAutoresizingMaskIntoConstraints = false
         buttonSV.axis = .horizontal
@@ -98,10 +101,51 @@ class PCSectionView: UIView {
   
     }
     
+    func expandView() {
+        button1 = PCIconButton(iconImage: Icons.clockIcon, title: FilterString.noLimit.rawValue)
+        button2 = PCIconButton(iconImage: Icons.outletIcon, title: FilterString.outlets.rawValue)
+        button3 = PCIconButton(iconImage: Icons.coffeeIcon, title: FilterString.goodCoffee.rawValue)
+        button4 = PCIconButton(iconImage: Icons.storeIcon, title: FilterString.openNow.rawValue)
+        button5 = PCIconButton(iconImage: Icons.wifiIcon, title: FilterString.wifi.rawValue)
+        button6 = PCIconButton(iconImage: Icons.quietIcon, title: FilterString.quiet.rawValue)
+        button7 = PCIconButton(iconImage: Icons.mrtIcon, title: FilterString.mrt.rawValue)
+        button8 = PCIconButton(iconImage: Icons.calendarIcon, title: FilterString.openTime.rawValue)
+        button9 = PCIconButton(iconImage: Icons.priceIcon, title: FilterString.price.rawValue)
+        iconButtons = [FilterList.noLimit.button,
+                       FilterList.outlets.button,
+                       FilterList.openNow.button,
+                       FilterList.goodCoffee.button,
+                       FilterList.mrt.button,
+                       FilterList.price.button,
+                       FilterList.wifi.button,
+                       FilterList.quiet.button,
+                       FilterList.openTime.button]
+        leftSV = createSV(buttons: [iconButtons[0], iconButtons[1], iconButtons[5], iconButtons[6], iconButtons[7]])
+        rightSV = createSV(buttons: [iconButtons[2], iconButtons[3], iconButtons[8], iconButtons[9]])
+        for button in iconButtons {
+            button.isTapped = false
+        }
+        buttonSV = UIStackView(arrangedSubviews: [leftSV, rightSV])
+        buttonSV.translatesAutoresizingMaskIntoConstraints = false
+        buttonSV.axis = .horizontal
+        buttonSV.distribution = .fillEqually
+        buttonSV.spacing = 10
+        buttonSV.backgroundColor = .systemBackground
+        addSubview(buttonSV)
+        print("ran")
+        NSLayoutConstraint.activate([
+            buttonSV.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: 10),
+            buttonSV.leadingAnchor.constraint(equalTo: leadingAnchor),
+            buttonSV.trailingAnchor.constraint(equalTo: trailingAnchor),
+            buttonSV.heightAnchor.constraint(equalToConstant: 200)
+        ])
+        
+    }
     func configureMoreButton() {
         moreButton = UIButton()
         moreButton.translatesAutoresizingMaskIntoConstraints = false
         moreButton.titleLabel?.text = "更多"
+        moreButton.backgroundColor = .cyan
         moreButton.setTitle("更多", for: .normal)
         moreButton.setTitleColor(Colors.defaultBrown, for: .normal)
         moreButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
@@ -115,19 +159,14 @@ class PCSectionView: UIView {
         ])
     }
     
-    func setButtons() {
+    func setSV() {
         if (headerText == "類別") {
-            button1 = PCIconButton(iconImage: Icons.computerIcon, title: Category.work.rawValue)
-            button2 = PCIconButton(iconImage: Icons.coffeeIcon, title: Category.drinkCoffee.rawValue)
-            button3 = PCIconButton(iconImage: Icons.relaxIcon, title: Category.relax.rawValue)
-            button4 = PCIconButton(iconImage: Icons.groupIcon, title: Category.groupMeal.rawValue)
-            
+            iconButtons = [CategoryList.work.button, CategoryList.groupMeal.button, CategoryList.relax.button, CategoryList.drinkCoffee.button]
         } else {
-            button1 = PCIconButton(iconImage: Icons.clockIcon, title: Filter.noLimit.rawValue)
-            button2 = PCIconButton(iconImage: Icons.outletIcon, title: Filter.outlets.rawValue)
-            button3 = PCIconButton(iconImage: Icons.coffeeIcon, title: Filter.goodCoffee.rawValue)
-            button4 = PCIconButton(iconImage: Icons.storeIcon, title: Filter.openNow.rawValue)
+            iconButtons = [FilterList.noLimit.button, FilterList.outlets.button, FilterList.openNow.button, FilterList.goodCoffee.button]
         }
+        leftSV = createSV(buttons: [iconButtons[0], iconButtons[1]])
+        rightSV = createSV(buttons: [iconButtons[2], iconButtons[3]])
     }
     
     func createSV(buttons: [UIView]) -> UIStackView {

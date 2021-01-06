@@ -7,14 +7,46 @@
 
 import UIKit
 
-enum Colors {
-    static let defaultBrown = UIColor(red: 128/255, green: 54/255, blue: 2/255, alpha: 1)
-    static let pcOrange = UIColor(red: 0.976, green: 0.506, blue: 0.259, alpha: 1)
+struct CategoryList {
+    static let work = Category(type: .work, button: PCIconButton(iconImage: Icons.computerIcon, title: CategoryString.work.rawValue), presetFilters: [FilterString.noLimit.rawValue, FilterString.wifi.rawValue, FilterString.outlets.rawValue, FilterString.quiet.rawValue])
+    static let groupMeal = Category(type: .groupMeal, button: PCIconButton(iconImage: Icons.groupIcon, title: CategoryString.groupMeal.rawValue), presetFilters: [FilterString.mrt.rawValue])
+    static let drinkCoffee = Category(type: .drinkCoffee, button: PCIconButton(iconImage: Icons.coffeeIcon, title: CategoryString.drinkCoffee.rawValue), presetFilters: [FilterString.goodCoffee.rawValue])
+    static let relax = Category(type: .relax, button: PCIconButton(iconImage: Icons.relaxIcon, title: CategoryString.relax.rawValue), presetFilters: [FilterString.quiet.rawValue, FilterString.noLimit.rawValue])
 }
 
-enum Images {
-    static let defaultLogo = UIImage(named: "javaLogo")!
-    static let cafePlaceholderImage = UIImage(named: "cafePlaceholderImage")
+
+struct FilterList {
+    static let noLimit = Filter(type: .noLimit, button: PCIconButton(iconImage: Icons.clockIcon, title: FilterString.noLimit.rawValue))
+    static let goodCoffee = Filter(type: .goodCoffee, button: PCIconButton(iconImage: Icons.coffeeIcon, title: FilterString.goodCoffee.rawValue))
+    static let outlets = Filter(type: .outlets, button: PCIconButton(iconImage: Icons.outletIcon, title: FilterString.outlets.rawValue))
+    static let wifi = Filter(type: .wifi, button: PCIconButton(iconImage: Icons.wifiIcon, title: FilterString.wifi.rawValue))
+    static let quiet = Filter(type: .quiet, button: PCIconButton(iconImage: Icons.quietIcon, title: FilterString.quiet.rawValue))
+    static let mrt = Filter(type: .mrt, button: PCIconButton(iconImage: Icons.mrtIcon, title: FilterString.mrt.rawValue))
+    static let price = Filter(type: .price, button: PCIconButton(iconImage: Icons.priceIcon, title: FilterString.price.rawValue))
+    static let openTime = Filter(type: .openTime, button: PCIconButton(iconImage: Icons.calendarIcon, title: FilterString.openTime.rawValue))
+    static let openNow = Filter(type: .openNow, button: PCIconButton(iconImage: Icons.storeIcon, title: FilterString.openNow.rawValue))
+}
+    
+
+
+enum CategoryString: String, CaseIterable {
+    case work = "專心工作"
+    case relax = "悠閒放空"
+    case groupMeal = "朋友聚餐"
+    case drinkCoffee = "喝杯咖啡"
+}
+
+
+enum FilterString: String, CaseIterable{
+    case noLimit = "不限時"
+    case goodCoffee = "有手沖"
+    case outlets = "有插座"
+    case openNow = "營業中"
+    case wifi = "有 Wi-Fi"
+    case quiet = "安靜"
+    case mrt = "捷運站近"
+    case price = "價位"
+    case openTime = "營業時間"
 }
 
 enum Icons {
@@ -25,22 +57,28 @@ enum Icons {
     static let outletIcon = UIImage(systemName: "battery.25")!
     static let clockIcon = UIImage(systemName: "clock")!
     static let storeIcon = UIImage(named: "storeIcon")!
+    static let wifiIcon = UIImage(systemName: "wifi")!
+    static let quietIcon = UIImage(systemName: "speaker.zzz")!
+    static let mrtIcon = UIImage(systemName: "tram.fill")!
+    static let priceIcon = UIImage(systemName: "dollarsign.circle")!
+    static let calendarIcon = UIImage(systemName: "calendar")!
 }
+
+
+
+
+enum Colors {
+    static let defaultBrown = UIColor(red: 128/255, green: 54/255, blue: 2/255, alpha: 1)
+    static let pcOrange = UIColor(red: 0.976, green: 0.506, blue: 0.259, alpha: 1)
+}
+
+enum Images {
+    static let defaultLogo = UIImage(named: "javaLogo")!
+    static let cafePlaceholderImage = UIImage(named: "cafePlaceholderImage")
+}
+
 
 enum Fonts {
     static let merriweather = UIFont(name: "Merriweather-Regular", size: 25)
 }
 
-enum Category: String, CaseIterable {
-    case work = "專心工作"
-    case relax = "悠閒放空"
-    case groupMeal = "朋友聚餐"
-    case drinkCoffee = "喝杯咖啡"
-}
-
-enum Filter: String, CaseIterable {
-    case noLimit = "不限時"
-    case goodCoffee = "有手沖"
-    case outlets = "有插座"
-    case openNow = "營業中"
-}
