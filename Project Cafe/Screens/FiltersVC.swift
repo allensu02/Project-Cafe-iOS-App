@@ -94,9 +94,10 @@ class FilterVC: UIViewController {
         resetButtons()
         sender.addColor()
         currentCategory = sender
+        var categoryList = CategoryList()
         if (currentCategory.label.text == CategoryString.work.rawValue) {
             for button in filterSectionView.iconButtons {
-                if (CategoryList.work.presetFilters.contains(button.label.text!)) {
+                if (categoryList.work.presetFilters.contains(button.label.text!)) {
                     button.addColor()
                     button.isTapped = true
                 }
@@ -104,7 +105,7 @@ class FilterVC: UIViewController {
         }
         if (currentCategory.label.text == CategoryString.relax.rawValue) {
             for button in filterSectionView.iconButtons {
-                if (CategoryList.relax.presetFilters.contains(button.label.text!)) {
+                if (categoryList.relax.presetFilters.contains(button.label.text!)) {
                     button.addColor()
                     button.isTapped = true
                 }
@@ -112,7 +113,7 @@ class FilterVC: UIViewController {
         }
         if (currentCategory.label.text == CategoryString.groupMeal.rawValue) {
             for button in filterSectionView.iconButtons {
-                if (CategoryList.groupMeal.presetFilters.contains(button.label.text!)) {
+                if (categoryList.groupMeal.presetFilters.contains(button.label.text!)) {
                     button.addColor()
                     button.isTapped = true
                 }
@@ -120,7 +121,7 @@ class FilterVC: UIViewController {
         }
         if (currentCategory.label.text == CategoryString.drinkCoffee.rawValue) {
             for button in filterSectionView.iconButtons {
-                if (CategoryList.drinkCoffee.presetFilters.contains(button.label.text!)) {
+                if (categoryList.drinkCoffee.presetFilters.contains(button.label.text!)) {
                     button.addColor()
                     button.isTapped = true
                 }
@@ -131,6 +132,10 @@ class FilterVC: UIViewController {
     
     @objc func categoryEdit() {
         print("edit selected")
+        //should change to edit later
+        let newCategoryVC = NewCategoryVC()
+        navigationController?.pushViewController(newCategoryVC, animated: true)
+        
     }
     
     @objc func categoryMore() {
@@ -148,9 +153,9 @@ class FilterVC: UIViewController {
             filterSectionView.heightAnchor.constraint(equalToConstant: 150)
         ])
         
-        for button in filterSectionView.iconButtons {
-            button.addTarget(self, action: #selector(FilterSelected), for: .touchUpInside)
-        }
+//        for button in filterSectionView.iconButtons {
+//            button.addTarget(self, action: #selector(FilterSelected), for: .touchUpInside)
+//        }
         filterSectionView.editButton.addTarget(self, action: #selector(filterEdit), for: .touchUpInside)
         filterSectionView.moreButton.addTarget(self, action: #selector(filterMore), for: .touchUpInside)
 
@@ -167,8 +172,6 @@ class FilterVC: UIViewController {
             sender.addColor()
             sender.isTapped = true
         }
-        
-        
     }
     
     @objc func filterEdit() {
@@ -203,7 +206,7 @@ class FilterVC: UIViewController {
             findButton.topAnchor.constraint(equalTo: filterSectionView.bottomAnchor, constant: 50),
             findButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             findButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            findButton.heightAnchor.constraint(equalToConstant: 50),
+            findButton.heightAnchor.constraint(equalToConstant: 40),
             findButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }

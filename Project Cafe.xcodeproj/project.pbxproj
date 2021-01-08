@@ -20,6 +20,11 @@
 		A34662EF25A596C000F68CAA /* EditCategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34662EE25A596C000F68CAA /* EditCategoryVC.swift */; };
 		A35CC26F25935B2700542907 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35CC26E25935B2700542907 /* APIKeys.swift */; };
 		A35CC2732593647300542907 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35CC2722593647300542907 /* NetworkManager.swift */; };
+		A390847925A5C04800CEAFFC /* PCCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A390847825A5C04800CEAFFC /* PCCategoryCell.swift */; };
+		A390847C25A5E6C800CEAFFC /* NewCategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A390847B25A5E6C800CEAFFC /* NewCategoryVC.swift */; };
+		A390847F25A5E74F00CEAFFC /* PCCategoryNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A390847E25A5E74F00CEAFFC /* PCCategoryNameView.swift */; };
+		A390848325A5E9D500CEAFFC /* PCTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A390848225A5E9D500CEAFFC /* PCTextField.swift */; };
+		A390848825A5EEEC00CEAFFC /* PCFilterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A390848725A5EEEC00CEAFFC /* PCFilterListView.swift */; };
 		A3D56C512590A24E00E939B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D56C502590A24E00E939B0 /* AppDelegate.swift */; };
 		A3D56C532590A24E00E939B0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D56C522590A24E00E939B0 /* SceneDelegate.swift */; };
 		A3D56C552590A24E00E939B0 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D56C542590A24E00E939B0 /* HomeVC.swift */; };
@@ -34,7 +39,6 @@
 		A3EF6B90259A41A500415952 /* PCLabelSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EF6B8F259A41A500415952 /* PCLabelSearchView.swift */; };
 		A3EF6B94259A558200415952 /* PCIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EF6B93259A558200415952 /* PCIconButton.swift */; };
 		A3EF6B97259A580B00415952 /* PCSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EF6B96259A580B00415952 /* PCSectionView.swift */; };
-		A3F261E2259CB84000D881EF /* PCSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F261E1259CB84000D881EF /* PCSectionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +60,11 @@
 		A3614FE72590B23200A34A43 /* Lora-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lora-Regular.ttf"; sourceTree = "<group>"; };
 		A3614FE82590B23200A34A43 /* Merriweather-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Bold.ttf"; sourceTree = "<group>"; };
 		A3614FE92590B23200A34A43 /* Merriweather-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Light.ttf"; sourceTree = "<group>"; };
+		A390847825A5C04800CEAFFC /* PCCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCCategoryCell.swift; sourceTree = "<group>"; };
+		A390847B25A5E6C800CEAFFC /* NewCategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCategoryVC.swift; sourceTree = "<group>"; };
+		A390847E25A5E74F00CEAFFC /* PCCategoryNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCCategoryNameView.swift; sourceTree = "<group>"; };
+		A390848225A5E9D500CEAFFC /* PCTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCTextField.swift; sourceTree = "<group>"; };
+		A390848725A5EEEC00CEAFFC /* PCFilterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCFilterListView.swift; sourceTree = "<group>"; };
 		A3D56C4D2590A24E00E939B0 /* Project Cafe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project Cafe.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3D56C502590A24E00E939B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3D56C522590A24E00E939B0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,7 +81,6 @@
 		A3EF6B8F259A41A500415952 /* PCLabelSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCLabelSearchView.swift; sourceTree = "<group>"; };
 		A3EF6B93259A558200415952 /* PCIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCIconButton.swift; sourceTree = "<group>"; };
 		A3EF6B96259A580B00415952 /* PCSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCSectionView.swift; sourceTree = "<group>"; };
-		A3F261E1259CB84000D881EF /* PCSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCSectionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +110,9 @@
 				A31E4DBD2594C7490013BF02 /* PCAlertContainerView.swift */,
 				A3E337142598DD380096E74F /* PCHomeTopView.swift */,
 				A3EF6B8F259A41A500415952 /* PCLabelSearchView.swift */,
+				A390847E25A5E74F00CEAFFC /* PCCategoryNameView.swift */,
 				A3EF6B96259A580B00415952 /* PCSectionView.swift */,
+				A390848725A5EEEC00CEAFFC /* PCFilterListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -142,6 +152,14 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		A390848125A5E9B600CEAFFC /* TextFields */ = {
+			isa = PBXGroup;
+			children = (
+				A390848225A5E9D500CEAFFC /* PCTextField.swift */,
+			);
+			path = TextFields;
+			sourceTree = "<group>";
+		};
 		A3D56C442590A24E00E939B0 = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +197,7 @@
 				A3D56C542590A24E00E939B0 /* HomeVC.swift */,
 				A31EAD782592244400A72021 /* FiltersVC.swift */,
 				A34662EE25A596C000F68CAA /* EditCategoryVC.swift */,
+				A390847B25A5E6C800CEAFFC /* NewCategoryVC.swift */,
 				A31EAD832592267800A72021 /* ResultsVC.swift */,
 			);
 			path = Screens;
@@ -208,6 +227,7 @@
 		A3D56C6E2590ACD500E939B0 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				A390848125A5E9B600CEAFFC /* TextFields */,
 				A3F261E0259CB82000D881EF /* Cells */,
 				A31E4DC12594C7710013BF02 /* View Controllers */,
 				A31E4DBC2594C7340013BF02 /* Views */,
@@ -242,7 +262,7 @@
 		A3F261E0259CB82000D881EF /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				A3F261E1259CB84000D881EF /* PCSectionCell.swift */,
+				A390847825A5C04800CEAFFC /* PCCategoryCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -322,14 +342,18 @@
 				A31E4DC32594C7840013BF02 /* PCAlertVC.swift in Sources */,
 				A31E4DCF2594C8600013BF02 /* UIViewController+Ext.swift in Sources */,
 				A31EAD7E259224BC00A72021 /* PCTitleLabel.swift in Sources */,
+				A390848325A5E9D500CEAFFC /* PCTextField.swift in Sources */,
 				A31E4DBE2594C7490013BF02 /* PCAlertContainerView.swift in Sources */,
+				A390847C25A5E6C800CEAFFC /* NewCategoryVC.swift in Sources */,
 				A31EAD842592267800A72021 /* ResultsVC.swift in Sources */,
+				A390847925A5C04800CEAFFC /* PCCategoryCell.swift in Sources */,
 				A31EAD792592244400A72021 /* FiltersVC.swift in Sources */,
 				A3D56C552590A24E00E939B0 /* HomeVC.swift in Sources */,
-				A3F261E2259CB84000D881EF /* PCSectionCell.swift in Sources */,
+				A390847F25A5E74F00CEAFFC /* PCCategoryNameView.swift in Sources */,
 				A35CC2732593647300542907 /* NetworkManager.swift in Sources */,
 				A3D56C512590A24E00E939B0 /* AppDelegate.swift in Sources */,
 				A31EAD81259224EC00A72021 /* PCSecondaryLabel.swift in Sources */,
+				A390848825A5EEEC00CEAFFC /* PCFilterListView.swift in Sources */,
 				A35CC26F25935B2700542907 /* APIKeys.swift in Sources */,
 				A3EF6B8D259A0FBF00415952 /* PCHomeScreenButton.swift in Sources */,
 				A31E4DBA25936AB70013BF02 /* Cafe.swift in Sources */,

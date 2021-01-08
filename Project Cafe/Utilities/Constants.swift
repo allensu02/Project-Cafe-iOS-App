@@ -8,23 +8,23 @@
 import UIKit
 
 struct CategoryList {
-    static let work = Category(type: .work, button: PCIconButton(iconImage: Icons.computerIcon, title: CategoryString.work.rawValue), presetFilters: [FilterString.noLimit.rawValue, FilterString.wifi.rawValue, FilterString.outlets.rawValue, FilterString.quiet.rawValue])
-    static let groupMeal = Category(type: .groupMeal, button: PCIconButton(iconImage: Icons.groupIcon, title: CategoryString.groupMeal.rawValue), presetFilters: [FilterString.mrt.rawValue])
-    static let drinkCoffee = Category(type: .drinkCoffee, button: PCIconButton(iconImage: Icons.coffeeIcon, title: CategoryString.drinkCoffee.rawValue), presetFilters: [FilterString.goodCoffee.rawValue])
-    static let relax = Category(type: .relax, button: PCIconButton(iconImage: Icons.relaxIcon, title: CategoryString.relax.rawValue), presetFilters: [FilterString.quiet.rawValue, FilterString.noLimit.rawValue])
+    let work = Category(type: .work, button: PCIconButton(iconImage: Icons.computerIcon, title: CategoryString.work.rawValue), presetFilters: [FilterString.noLimit.rawValue, FilterString.wifi.rawValue, FilterString.outlets.rawValue, FilterString.quiet.rawValue])
+    let groupMeal = Category(type: .groupMeal, button: PCIconButton(iconImage: Icons.groupIcon, title: CategoryString.groupMeal.rawValue), presetFilters: [FilterString.mrt.rawValue])
+    let drinkCoffee = Category(type: .drinkCoffee, button: PCIconButton(iconImage: Icons.coffeeIcon, title: CategoryString.drinkCoffee.rawValue), presetFilters: [FilterString.goodCoffee.rawValue])
+    let relax = Category(type: .relax, button: PCIconButton(iconImage: Icons.relaxIcon, title: CategoryString.relax.rawValue), presetFilters: [FilterString.quiet.rawValue, FilterString.noLimit.rawValue])
 }
 
 
 struct FilterList {
-    static let noLimit = Filter(type: .noLimit, button: PCIconButton(iconImage: Icons.clockIcon, title: FilterString.noLimit.rawValue))
-    static let goodCoffee = Filter(type: .goodCoffee, button: PCIconButton(iconImage: Icons.coffeeIcon, title: FilterString.goodCoffee.rawValue))
-    static let outlets = Filter(type: .outlets, button: PCIconButton(iconImage: Icons.outletIcon, title: FilterString.outlets.rawValue))
-    static let wifi = Filter(type: .wifi, button: PCIconButton(iconImage: Icons.wifiIcon, title: FilterString.wifi.rawValue))
-    static let quiet = Filter(type: .quiet, button: PCIconButton(iconImage: Icons.quietIcon, title: FilterString.quiet.rawValue))
-    static let mrt = Filter(type: .mrt, button: PCIconButton(iconImage: Icons.mrtIcon, title: FilterString.mrt.rawValue))
-    static let price = Filter(type: .price, button: PCIconButton(iconImage: Icons.priceIcon, title: FilterString.price.rawValue))
-    static let openTime = Filter(type: .openTime, button: PCIconButton(iconImage: Icons.calendarIcon, title: FilterString.openTime.rawValue))
-    static let openNow = Filter(type: .openNow, button: PCIconButton(iconImage: Icons.storeIcon, title: FilterString.openNow.rawValue))
+    let noLimit = Filter(type: .noLimit, button: PCIconButton(iconImage: Icons.clockIcon, title: FilterString.noLimit.rawValue))
+    let goodCoffee = Filter(type: .goodCoffee, button: PCIconButton(iconImage: Icons.coffeeIcon, title: FilterString.goodCoffee.rawValue))
+    let outlets = Filter(type: .outlets, button: PCIconButton(iconImage: Icons.outletIcon, title: FilterString.outlets.rawValue))
+    let wifi = Filter(type: .wifi, button: PCIconButton(iconImage: Icons.wifiIcon, title: FilterString.wifi.rawValue))
+    let quiet = Filter(type: .quiet, button: PCIconButton(iconImage: Icons.quietIcon, title: FilterString.quiet.rawValue))
+    let mrt = Filter(type: .mrt, button: PCIconButton(iconImage: Icons.mrtIcon, title: FilterString.mrt.rawValue))
+    let price = Filter(type: .price, button: PCIconButton(iconImage: Icons.priceIcon, title: FilterString.price.rawValue))
+    let openTime = Filter(type: .openTime, button: PCIconButton(iconImage: Icons.calendarIcon, title: FilterString.openTime.rawValue))
+    let openNow = Filter(type: .openNow, button: PCIconButton(iconImage: Icons.storeIcon, title: FilterString.openNow.rawValue))
 }
     
 
@@ -62,6 +62,7 @@ enum Icons {
     static let mrtIcon = UIImage(systemName: "tram.fill")!
     static let priceIcon = UIImage(systemName: "dollarsign.circle")!
     static let calendarIcon = UIImage(systemName: "calendar")!
+    static let minusIcon = UIImage(systemName: "minus.circle")!
 }
 
 
@@ -74,7 +75,7 @@ enum Colors {
 
 enum Images {
     static let defaultLogo = UIImage(named: "javaLogo")!
-    static let cafePlaceholderImage = UIImage(named: "cafePlaceholderImage")
+    static let cafePlaceholderImage = UIImage(named: "cafePlaceholderImage")!
 }
 
 

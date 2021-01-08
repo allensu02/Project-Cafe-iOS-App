@@ -1,13 +1,13 @@
 //
-//  PCSectionCell.swift
+//  PCCategoryCell.swift
 //  Project Cafe
 //
-//  Created by Allen Su on 2020/12/30.
+//  Created by Allen Su on 2021/1/6.
 //
 
 import UIKit
 
-class PCSectionCell: UITableViewCell {
+class PCCategoryCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()

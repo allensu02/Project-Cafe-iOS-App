@@ -111,15 +111,16 @@ class PCSectionView: UIView {
         button7 = PCIconButton(iconImage: Icons.mrtIcon, title: FilterString.mrt.rawValue)
         button8 = PCIconButton(iconImage: Icons.calendarIcon, title: FilterString.openTime.rawValue)
         button9 = PCIconButton(iconImage: Icons.priceIcon, title: FilterString.price.rawValue)
-        iconButtons = [FilterList.noLimit.button,
-                       FilterList.outlets.button,
-                       FilterList.openNow.button,
-                       FilterList.goodCoffee.button,
-                       FilterList.mrt.button,
-                       FilterList.price.button,
-                       FilterList.wifi.button,
-                       FilterList.quiet.button,
-                       FilterList.openTime.button]
+        var filterList = FilterList()
+        iconButtons = [filterList.noLimit.button,
+                       filterList.outlets.button,
+                       filterList.openNow.button,
+                       filterList.goodCoffee.button,
+                       filterList.mrt.button,
+                       filterList.price.button,
+                       filterList.wifi.button,
+                       filterList.quiet.button,
+                       filterList.openTime.button]
         leftSV = createSV(buttons: [iconButtons[0], iconButtons[1], iconButtons[5], iconButtons[6], iconButtons[7]])
         rightSV = createSV(buttons: [iconButtons[2], iconButtons[3], iconButtons[8], iconButtons[9]])
         for button in iconButtons {
