@@ -180,14 +180,13 @@ class FilterVC: UIViewController {
         findButton = PCButton(backgroundColor: Colors.defaultBrown, title: "找咖啡廳！")
         contentView.addSubview(findButton)
         NSLayoutConstraint.activate([
-//            findButton.topAnchor.constraint(equalTo: filterSectionView.bottomAnchor, constant: 20),
+            findButton.topAnchor.constraint(equalTo: filterSectionView.bottomAnchor, constant: 20),
             findButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             findButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             findButton.heightAnchor.constraint(equalToConstant: 40),
             findButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
-    
 
     @objc func dismissKeyboard() {
         view.endEditing(true)

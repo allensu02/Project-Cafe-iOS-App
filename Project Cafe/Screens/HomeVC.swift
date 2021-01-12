@@ -11,6 +11,8 @@ class HomeVC: UIViewController {
 
     var topView: PCHomeTopView!
     var buttonOne: PCHomeScreenButton!
+    var newButtonOne: PCNewHomeScreenButton!
+    var newButtonTwo: PCNewHomeScreenButton!
     var buttonTwo: PCHomeScreenButton!
     var stackView: UIStackView!
     override func viewWillAppear(_ animated: Bool) {
@@ -41,29 +43,35 @@ class HomeVC: UIViewController {
     }
     
     func configureButton() {
-        buttonOne = PCHomeScreenButton(icon: UIImage(systemName: "mappin.and.ellipse")!)
-        buttonOne.buttonLabel.text = "離我最近"
-        buttonOne.addTarget(self, action: #selector(goToResults), for: .touchUpInside)
-        buttonTwo = PCHomeScreenButton(icon: UIImage(systemName: "text.badge.plus")!)
-        buttonTwo.buttonLabel.text = "偏好篩選"
-        buttonTwo.addTarget(self, action: #selector(goToFilterStrings), for: .touchUpInside)
-        stackView = UIStackView(arrangedSubviews: [buttonOne, buttonTwo])
+//        buttonOne = PCHomeScreenButton(icon: UIImage(systemName: "mappin.and.ellipse")!)
+//        buttonOne.buttonLabel.text = "離我最近"
+//        buttonOne.addTarget(self, action: #selector(goToResults), for: .touchUpInside)
+//        buttonTwo = PCHomeScreenButton(icon: UIImage(systemName: "text.badge.plus")!)
+//        buttonTwo.buttonLabel.text = "偏好篩選"
+//        buttonTwo.addTarget(self, action: #selector(goToFilterStrings), for: .touchUpInside)
+        
+        newButtonOne = PCNewHomeScreenButton(icon: Icons.homeOneIcon, smallText: "偏好篩選", largeText: "我想找一家適合...", backgroundColor: Colors.homeOneColor)
+        newButtonOne.addTarget(self, action: #selector(goToFilter), for: .touchUpInside)
+        newButtonTwo = PCNewHomeScreenButton(icon: Icons.homeTwoIcon, smallText: "離我最近", largeText: "附近有什麼咖啡廳?", backgroundColor: Colors.homeTwoColor)
+        newButtonTwo.addTarget(self, action: #selector(goToResults), for: .touchUpInside)
+
+        stackView = UIStackView(arrangedSubviews: [newButtonOne, newButtonTwo])
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
+        stackView.axis = .vertical
         stackView.distribution = .fillEqually
         stackView.spacing = 30
         view.addSubview(stackView)
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topView.bottomAnchor, constant: 70),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
-            stackView.heightAnchor.constraint(equalToConstant: 130)
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            stackView.heightAnchor.constraint(equalToConstant: 260)
         ])
     }
     
     
     
-    @objc func goToFilterStrings() {
+    @objc func goToFilter() {
         let filterVC = FilterVC()
         navigationController?.pushViewController(filterVC, animated: true)
 //        NetworkManager.shared.getWeather(city: "taipei") { (cafe) in

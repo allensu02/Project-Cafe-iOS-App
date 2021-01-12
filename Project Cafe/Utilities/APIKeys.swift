@@ -7,5 +7,5 @@
 
 import Foundation
 enum APIKeys {
-    static let openWeatherKey = "a6117800a884cf4031942ac9cfbff223"
+    
 }
