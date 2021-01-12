@@ -25,6 +25,9 @@
 		A390847F25A5E74F00CEAFFC /* PCCategoryNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A390847E25A5E74F00CEAFFC /* PCCategoryNameView.swift */; };
 		A390848325A5E9D500CEAFFC /* PCTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A390848225A5E9D500CEAFFC /* PCTextField.swift */; };
 		A390848825A5EEEC00CEAFFC /* PCFilterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A390848725A5EEEC00CEAFFC /* PCFilterListView.swift */; };
+		A3B5F61125A8653B008B3D0C /* PCFilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B5F61025A8653B008B3D0C /* PCFilterButton.swift */; };
+		A3B5F61425A86A3F008B3D0C /* PCCategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B5F61325A86A3F008B3D0C /* PCCategoryButton.swift */; };
+		A3B5F61725A8B2A3008B3D0C /* UITextField+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B5F61625A8B2A3008B3D0C /* UITextField+Ext.swift */; };
 		A3D56C512590A24E00E939B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D56C502590A24E00E939B0 /* AppDelegate.swift */; };
 		A3D56C532590A24E00E939B0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D56C522590A24E00E939B0 /* SceneDelegate.swift */; };
 		A3D56C552590A24E00E939B0 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D56C542590A24E00E939B0 /* HomeVC.swift */; };
@@ -39,6 +42,7 @@
 		A3EF6B90259A41A500415952 /* PCLabelSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EF6B8F259A41A500415952 /* PCLabelSearchView.swift */; };
 		A3EF6B94259A558200415952 /* PCIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EF6B93259A558200415952 /* PCIconButton.swift */; };
 		A3EF6B97259A580B00415952 /* PCSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EF6B96259A580B00415952 /* PCSectionView.swift */; };
+		A3F8E19325ACAF0700D3595E /* PCNewHomeScreenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F8E19225ACAF0700D3595E /* PCNewHomeScreenButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +69,9 @@
 		A390847E25A5E74F00CEAFFC /* PCCategoryNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCCategoryNameView.swift; sourceTree = "<group>"; };
 		A390848225A5E9D500CEAFFC /* PCTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCTextField.swift; sourceTree = "<group>"; };
 		A390848725A5EEEC00CEAFFC /* PCFilterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCFilterListView.swift; sourceTree = "<group>"; };
+		A3B5F61025A8653B008B3D0C /* PCFilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCFilterButton.swift; sourceTree = "<group>"; };
+		A3B5F61325A86A3F008B3D0C /* PCCategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCCategoryButton.swift; sourceTree = "<group>"; };
+		A3B5F61625A8B2A3008B3D0C /* UITextField+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Ext.swift"; sourceTree = "<group>"; };
 		A3D56C4D2590A24E00E939B0 /* Project Cafe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project Cafe.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3D56C502590A24E00E939B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3D56C522590A24E00E939B0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +88,7 @@
 		A3EF6B8F259A41A500415952 /* PCLabelSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCLabelSearchView.swift; sourceTree = "<group>"; };
 		A3EF6B93259A558200415952 /* PCIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCIconButton.swift; sourceTree = "<group>"; };
 		A3EF6B96259A580B00415952 /* PCSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCSectionView.swift; sourceTree = "<group>"; };
+		A3F8E19225ACAF0700D3595E /* PCNewHomeScreenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCNewHomeScreenButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				A31E4DCA2594C8340013BF02 /* UIView+Ext.swift */,
+				A3B5F61625A8B2A3008B3D0C /* UITextField+Ext.swift */,
 				A31E4DCE2594C8600013BF02 /* UIViewController+Ext.swift */,
 			);
 			path = Extensions;
@@ -242,7 +251,10 @@
 			children = (
 				A3D56C702590ACFC00E939B0 /* PCButton.swift */,
 				A3EF6B8C259A0FBF00415952 /* PCHomeScreenButton.swift */,
+				A3F8E19225ACAF0700D3595E /* PCNewHomeScreenButton.swift */,
 				A3EF6B93259A558200415952 /* PCIconButton.swift */,
+				A3B5F61025A8653B008B3D0C /* PCFilterButton.swift */,
+				A3B5F61325A86A3F008B3D0C /* PCCategoryButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -344,10 +356,12 @@
 				A31EAD7E259224BC00A72021 /* PCTitleLabel.swift in Sources */,
 				A390848325A5E9D500CEAFFC /* PCTextField.swift in Sources */,
 				A31E4DBE2594C7490013BF02 /* PCAlertContainerView.swift in Sources */,
+				A3B5F61125A8653B008B3D0C /* PCFilterButton.swift in Sources */,
 				A390847C25A5E6C800CEAFFC /* NewCategoryVC.swift in Sources */,
 				A31EAD842592267800A72021 /* ResultsVC.swift in Sources */,
 				A390847925A5C04800CEAFFC /* PCCategoryCell.swift in Sources */,
 				A31EAD792592244400A72021 /* FiltersVC.swift in Sources */,
+				A3B5F61725A8B2A3008B3D0C /* UITextField+Ext.swift in Sources */,
 				A3D56C552590A24E00E939B0 /* HomeVC.swift in Sources */,
 				A390847F25A5E74F00CEAFFC /* PCCategoryNameView.swift in Sources */,
 				A35CC2732593647300542907 /* NetworkManager.swift in Sources */,
@@ -362,9 +376,11 @@
 				A3D56C6B2590A66B00E939B0 /* Constants.swift in Sources */,
 				A3EF6B97259A580B00415952 /* PCSectionView.swift in Sources */,
 				A31E4DC72594C7C30013BF02 /* PCBodyLabel.swift in Sources */,
+				A3F8E19325ACAF0700D3595E /* PCNewHomeScreenButton.swift in Sources */,
 				A3E337152598DD380096E74F /* PCHomeTopView.swift in Sources */,
 				A3EF6B90259A41A500415952 /* PCLabelSearchView.swift in Sources */,
 				A3D56C712590ACFC00E939B0 /* PCButton.swift in Sources */,
+				A3B5F61425A86A3F008B3D0C /* PCCategoryButton.swift in Sources */,
 				A3D6315E25A1CE22002B47D4 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -17,11 +17,11 @@ class PCHomeTopView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
-        
         configureBackgroundImageView()
-        configureMainLabel()
-        configureKnowButton()
         configureSearchBar()
+        configureMainLabel()
+        //configureKnowButton()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -29,7 +29,7 @@ class PCHomeTopView: UIView {
     }
     
     func configureBackgroundImageView() {
-        backgroundImageView = UIImageView(image: Images.cafePlaceholderImage)
+        backgroundImageView = UIImageView(image: Images.homeScreenImage)
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         backgroundImageView.contentMode = .scaleAspectFill
         addSubview(backgroundImageView)
@@ -54,10 +54,10 @@ class PCHomeTopView: UIView {
         //updates all layouts right now
         layoutIfNeeded()
         NSLayoutConstraint.activate([
-            mainLabel.topAnchor.constraint(equalTo: topAnchor, constant: self.frame.height * 0.25),
+            mainLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30),
             mainLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
-            mainLabel.widthAnchor.constraint(equalToConstant: self.frame.width * 0.9),
-            mainLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -self.frame.height * 0.5)
+            mainLabel.widthAnchor.constraint(equalToConstant: 200),
+            mainLabel.heightAnchor.constraint(equalToConstant: 130)
         ])
     }
     
@@ -87,10 +87,10 @@ class PCHomeTopView: UIView {
         addSubview(searchBar)
         
         NSLayoutConstraint.activate([
-            searchBar.centerXAnchor.constraint(equalTo: centerXAnchor),
-            searchBar.widthAnchor.constraint(equalToConstant: self.frame.width * 1.3),
+            searchBar.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
+            searchBar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             searchBar.heightAnchor.constraint(equalToConstant: 60),
-            searchBar.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 30)
+            searchBar.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
         ])
     }
 }

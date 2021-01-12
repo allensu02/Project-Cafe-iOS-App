@@ -19,6 +19,9 @@ class NewCategoryVC: UIViewController {
 
         title = "新增類別"
         view.backgroundColor = .systemBackground
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
         configureUI()
     }
     
@@ -61,12 +64,12 @@ class NewCategoryVC: UIViewController {
             filterList.topAnchor.constraint(equalTo: nameView.bottomAnchor, constant: 60),
             filterList.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             filterList.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            filterList.heightAnchor.constraint(equalToConstant: 300)
+            filterList.heightAnchor.constraint(equalToConstant: 350)
         ])
     }
     
     func configureSaveButton() {
-        saveButton = PCButton(backgroundColor: Colors.defaultBrown, title: "找咖啡廳！")
+        saveButton = PCButton(backgroundColor: Colors.defaultBrown, title: "儲存新類別")
         view.addSubview(saveButton)
         NSLayoutConstraint.activate([
             saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
@@ -74,5 +77,14 @@ class NewCategoryVC: UIViewController {
             saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             saveButton.heightAnchor.constraint(equalToConstant: 40)
         ])
+        saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
+    }
+    
+    @objc func saveTapped() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

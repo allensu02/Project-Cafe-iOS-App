@@ -14,9 +14,10 @@ class FilterVC: UIViewController {
     var categorySectionView: PCSectionView!
     var filterSectionView: PCSectionView!
     var findButton: PCButton!
-    var currentCategory: PCIconButton!
+    var currentCategory: PCCategoryButton!
     var scrollView: UIScrollView!
     var contentView: UIView!
+    var filterHeightAnchor: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,83 +81,59 @@ class FilterVC: UIViewController {
             categorySectionView.topAnchor.constraint(equalTo: searchBarView.bottomAnchor, constant: 10),
             categorySectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             categorySectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            categorySectionView.heightAnchor.constraint(equalToConstant: 150)
+            categorySectionView.heightAnchor.constraint(equalToConstant: 200)
         ])
-        
-        for button in categorySectionView.iconButtons {
+
+        for button in categorySectionView.categoryButtons {
             button.addTarget(self, action: #selector(categorySelected) , for: .touchUpInside)
         }
         categorySectionView.editButton.addTarget(self, action: #selector(categoryEdit), for: .touchUpInside)
         categorySectionView.moreButton.addTarget(self, action: #selector(categoryMore), for: .touchUpInside)
+        categorySectionView.moreButton.isHidden = true
     }
     
-    @objc func categorySelected(sender: PCIconButton!) {
+    @objc func categorySelected(sender: PCCategoryButton!) {
         resetButtons()
         sender.addColor()
+        
         currentCategory = sender
-        var categoryList = CategoryList()
-        if (currentCategory.label.text == CategoryString.work.rawValue) {
-            for button in filterSectionView.iconButtons {
-                if (categoryList.work.presetFilters.contains(button.label.text!)) {
-                    button.addColor()
-                    button.isTapped = true
-                }
-            }
-        }
-        if (currentCategory.label.text == CategoryString.relax.rawValue) {
-            for button in filterSectionView.iconButtons {
-                if (categoryList.relax.presetFilters.contains(button.label.text!)) {
-                    button.addColor()
-                    button.isTapped = true
-                }
-            }
-        }
-        if (currentCategory.label.text == CategoryString.groupMeal.rawValue) {
-            for button in filterSectionView.iconButtons {
-                if (categoryList.groupMeal.presetFilters.contains(button.label.text!)) {
-                    button.addColor()
-                    button.isTapped = true
-                }
-            }
-        }
-        if (currentCategory.label.text == CategoryString.drinkCoffee.rawValue) {
-            for button in filterSectionView.iconButtons {
-                if (categoryList.drinkCoffee.presetFilters.contains(button.label.text!)) {
-                    button.addColor()
-                    button.isTapped = true
-                }
+        for button in filterSectionView.filterButtons {
+            if currentCategory.filterList.contains(button.filter!) {
+                button.addColor()
+                button.isTapped = true
             }
         }
 
     }
     
     @objc func categoryEdit() {
-        print("edit selected")
         //should change to edit later
-        let newCategoryVC = NewCategoryVC()
-        navigationController?.pushViewController(newCategoryVC, animated: true)
+        let editCategoryVC = EditCategoryVC()
+        navigationController?.pushViewController(editCategoryVC, animated: true)
         
     }
     
     @objc func categoryMore() {
-        
+        print("cat more selected")
     }
     
     
     func configureFilterView() {
         filterSectionView = PCSectionView(titleText: "條件")
         contentView.addSubview(filterSectionView)
+        filterHeightAnchor = filterSectionView.heightAnchor.constraint(equalToConstant: 200)
         NSLayoutConstraint.activate([
-            filterSectionView.topAnchor.constraint(equalTo: categorySectionView.bottomAnchor, constant: 50),
+            filterSectionView.topAnchor.constraint(equalTo: categorySectionView.bottomAnchor, constant: 10),
             filterSectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             filterSectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            filterSectionView.heightAnchor.constraint(equalToConstant: 150)
+            filterHeightAnchor
         ])
         
-//        for button in filterSectionView.iconButtons {
-//            button.addTarget(self, action: #selector(FilterSelected), for: .touchUpInside)
-//        }
-        filterSectionView.editButton.addTarget(self, action: #selector(filterEdit), for: .touchUpInside)
+        for button in filterSectionView.filterButtons {
+            button.addTarget(self, action: #selector(FilterSelected), for: .touchUpInside)
+        }
+        filterSectionView.editButton.isHidden = true
+        filterSectionView.moreButton.bringSubviewToFront(view)
         filterSectionView.moreButton.addTarget(self, action: #selector(filterMore), for: .touchUpInside)
 
     }
@@ -165,7 +142,7 @@ class FilterVC: UIViewController {
         if (sender.isTapped) {
             sender.removeColor()
             sender.isTapped = false
-            for button in categorySectionView.iconButtons {
+            for button in categorySectionView.categoryButtons {
                 button.removeColor()
             }
         } else {
@@ -173,27 +150,27 @@ class FilterVC: UIViewController {
             sender.isTapped = true
         }
     }
-    
-    @objc func filterEdit() {
-        print("edit selected")
+
+    @objc func filterMore() {
+        print("ran filtermore")
+        
+        filterSectionView.expandFilter()
+        filterHeightAnchor.constant = 430
+        //filterSectionView.hideButton.addTarget(self, action: #selector(hideTapped), for: .touchUpInside)
+        
     }
     
-    @objc func filterMore() {
-        filterSectionView.expandView()
-        print("ran filtermore")
-        //updates the layout for the next run loop
-        filterSectionView.setNeedsLayout()
-        //updates all layouts right now
-        filterSectionView.layoutIfNeeded()
+    @objc func hideTapped() {
+        filterSectionView.reduce()
     }
     
     func resetButtons() {
-        for button in filterSectionView.iconButtons {
+        for button in filterSectionView.filterButtons {
             button.removeColor()
             button.isTapped = false
         }
         
-        for button in categorySectionView.iconButtons {
+        for button in categorySectionView.categoryButtons {
             button.removeColor()
             button.isTapped = false
         }
@@ -203,7 +180,7 @@ class FilterVC: UIViewController {
         findButton = PCButton(backgroundColor: Colors.defaultBrown, title: "找咖啡廳！")
         contentView.addSubview(findButton)
         NSLayoutConstraint.activate([
-            findButton.topAnchor.constraint(equalTo: filterSectionView.bottomAnchor, constant: 50),
+//            findButton.topAnchor.constraint(equalTo: filterSectionView.bottomAnchor, constant: 20),
             findButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             findButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             findButton.heightAnchor.constraint(equalToConstant: 40),

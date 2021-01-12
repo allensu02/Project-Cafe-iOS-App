@@ -8,20 +8,20 @@
 import UIKit
 
 class PCFilterListView: UIView {
-    var button1: PCIconButton!
-    var button2: PCIconButton!
-    var button3: PCIconButton!
-    var button4: PCIconButton!
-    var button5: PCIconButton!
-    var button6: PCIconButton!
-    var button7: PCIconButton!
-    var button8: PCIconButton!
-    var button9: PCIconButton!
-    var button10: PCIconButton!
+    var button1: PCFilterButton!
+    var button2: PCFilterButton!
+    var button3: PCFilterButton!
+    var button4: PCFilterButton!
+    var button5: PCFilterButton!
+    var button6: PCFilterButton!
+    var button7: PCFilterButton!
+    var button8: PCFilterButton!
+    var button9: PCFilterButton!
+    var button10: PCFilterButton!
 
     var leftSV: UIView!
     var rightSV: UIView!
-    var iconButtons: [PCIconButton] = []
+    var filterButtons: [PCFilterButton] = []
     var buttonSV: UIStackView!
     var topLabel: PCTitleLabel!
     
@@ -58,28 +58,23 @@ class PCFilterListView: UIView {
     }
     
     func configureSV() {
-        button1 = PCIconButton(iconImage: Icons.clockIcon, title: FilterString.noLimit.rawValue)
-        button2 = PCIconButton(iconImage: Icons.outletIcon, title: FilterString.outlets.rawValue)
-        button3 = PCIconButton(iconImage: Icons.coffeeIcon, title: FilterString.goodCoffee.rawValue)
-        button4 = PCIconButton(iconImage: Icons.storeIcon, title: FilterString.openNow.rawValue)
-        button5 = PCIconButton(iconImage: Icons.wifiIcon, title: FilterString.wifi.rawValue)
-        button6 = PCIconButton(iconImage: Icons.quietIcon, title: FilterString.quiet.rawValue)
-        button7 = PCIconButton(iconImage: Icons.mrtIcon, title: FilterString.mrt.rawValue)
-        button8 = PCIconButton(iconImage: Icons.calendarIcon, title: FilterString.openTime.rawValue)
-        button9 = PCIconButton(iconImage: Icons.priceIcon, title: FilterString.price.rawValue)
-        var filterList = FilterList()
-        iconButtons = [filterList.noLimit.button,
-                       filterList.outlets.button,
-                       filterList.openNow.button,
-                       filterList.goodCoffee.button,
-                       filterList.mrt.button,
-                       filterList.price.button,
-                       filterList.wifi.button,
-                       filterList.quiet.button,
-                       filterList.openTime.button]
-        leftSV = createSV(buttons: [iconButtons[0], iconButtons[1], iconButtons[4], iconButtons[5], iconButtons[6]])
-        rightSV = createSV(buttons: [iconButtons[2], iconButtons[3], iconButtons[7], iconButtons[8]])
-        for button in iconButtons {
+        let noLimit = PCFilterButton(iconImage: Icons.clockIcon, filter: .noLimit)
+        let openNow = PCFilterButton(iconImage: Icons.storeIcon, filter: .openNow)
+        let outlets = PCFilterButton(iconImage: Icons.outletIcon, filter: .outlets)
+        let goodCoffee = PCFilterButton(iconImage: Icons.coffeeIcon, filter: .goodCoffee)
+        let mrt = PCFilterButton(iconImage: Icons.mrtIcon, filter: .mrt)
+        let seats = PCFilterButton(iconImage: Icons.seatsIcon, filter: .seats)
+        let price = PCFilterButton(iconImage: Icons.priceIcon, filter: .price)
+        let desserts = PCFilterButton(iconImage: Icons.dessertIcon, filter: .desserts)
+        let wifi = PCFilterButton(iconImage: Icons.wifiIcon, filter: .wifi)
+        let quiet = PCFilterButton(iconImage: Icons.quietIcon, filter: .quiet)
+        let openTime = PCFilterButton(iconImage: Icons.calendarIcon, filter: .openTime)
+        let meals = PCFilterButton(iconImage: Icons.foodIcon, filter: .meals)
+        filterButtons = [noLimit, openNow, outlets, goodCoffee, mrt, seats, price, desserts, wifi, quiet, openTime, meals]
+        
+        leftSV = createSV(buttons: [filterButtons[0], filterButtons[1], filterButtons[4], filterButtons[5], filterButtons[6], filterButtons[7]])
+        rightSV = createSV(buttons: [filterButtons[2], filterButtons[3], filterButtons[8], filterButtons[9], filterButtons[10], filterButtons[11]])
+        for button in filterButtons {
             button.isTapped = false
         }
         buttonSV = UIStackView(arrangedSubviews: [leftSV, rightSV])
@@ -96,7 +91,7 @@ class PCFilterListView: UIView {
             buttonSV.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
         
-        for button in iconButtons {
+        for button in filterButtons {
             button.addTarget(self, action: #selector(FilterSelected), for: .touchUpInside)
         }
     }
@@ -109,13 +104,10 @@ class PCFilterListView: UIView {
         return sv
     }
     
-    @objc func FilterSelected(sender: PCIconButton!) {
+    @objc func FilterSelected(sender: PCFilterButton!) {
         if (sender.isTapped) {
             sender.removeColor()
             sender.isTapped = false
-            for button in iconButtons {
-                button.removeColor()
-            }
         } else {
             sender.addColor()
             sender.isTapped = true

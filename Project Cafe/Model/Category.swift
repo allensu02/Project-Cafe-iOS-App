@@ -7,13 +7,9 @@
 
 import Foundation
 
-class Category{
-    var type: CategoryString
-    var button: PCIconButton!
-    var presetFilters: [String]
-    init (type: CategoryString, button: PCIconButton, presetFilters: [String]) {
-        self.type = type
-        self.button = button
-        self.presetFilters = presetFilters
-    }
+enum Category: String, CaseIterable{
+    case work = "專心工作"
+    case relax = "悠閒放空"
+    case groupMeal = "朋友聚餐"
+    case drinkCoffee = "喝杯咖啡"
 }

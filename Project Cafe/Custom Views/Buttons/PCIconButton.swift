@@ -14,8 +14,7 @@ class PCIconButton: UIButton {
     var text: String!
     var label: PCTitleLabel!
     var isTapped: Bool!
-    weak var filter: Filter?
-    weak var category: Category?
+
     
     override init(frame: CGRect) {
         super.init(frame: frame)

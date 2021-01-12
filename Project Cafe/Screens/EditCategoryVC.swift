@@ -11,22 +11,23 @@ class EditCategoryVC: UIViewController {
 
     var instructionLabel: PCTitleLabel!
     var tableView: UITableView!
-    var categories: CategoryList!
-    var myCategoryList: []
+    var addButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         title = "編輯類別"
         view.backgroundColor = .systemBackground
-        categories = CategoryList()
-        myCategoryList = [categories.work, categories.groupMeal, categories.relax, categories.drinkCoffee]
         configureUI()
     }
     
     func configureUI() {
         configureLabel()
         configureTableView()
+        tableView.reloadData()
+        addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
+        navigationItem.setRightBarButton(addButton, animated: true)
     }
     
     func configureLabel() {
@@ -47,12 +48,16 @@ class EditCategoryVC: UIViewController {
         tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
-        
         tableView.delegate = self
         tableView.dataSource = self
-        
+        tableView.separatorStyle = .none
+        tableView.rowHeight = 60
+        tableView.register(PCCategoryCell.self, forCellReuseIdentifier: "catCell")
         NSLayoutConstraint.activate([
-            
+            tableView.topAnchor.constraint(equalTo: instructionLabel.bottomAnchor, constant: 30),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            tableView.heightAnchor.constraint(equalToConstant: 300)
         ])
     }
 
@@ -60,12 +65,35 @@ class EditCategoryVC: UIViewController {
 
 extension EditCategoryVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return myCategoryList.count
+        return Category.allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "catCell") as? PCCategoryCell else {
+            print("error here")
+            return UITableViewCell()
+        }
+        if indexPath.row == 1 {
+            cell.category = .work
+        }
+        if indexPath.row == 2 {
+            cell.category = .relax
+        }
+        if indexPath.row == 3 {
+            cell.category = .drinkCoffee
+        }
+        if indexPath.row == 4 {
+            cell.category = .groupMeal
+        }
+        cell.configure()
+        //cell.textLabel?.text = cell.category.rawValue
+        return cell
     }
     
+    @objc func addTapped() {
+        let newCatVC = NewCategoryVC()
+        navigationController?.pushViewController(newCatVC, animated: true)
+    }
     
 }

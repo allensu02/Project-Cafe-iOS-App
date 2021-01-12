@@ -57,6 +57,8 @@ class PCCategoryNameView: UIView {
     func configureTextField() {
         nameTextField = PCTextField()
         nameTextField.placeholder = "舉例: 適合工作、悠閒發呆等"
+        nameTextField.textAlignment = .center
+        nameTextField.font = .systemFont(ofSize: 20, weight: .black)
         addSubview(nameTextField)
         
         NSLayoutConstraint.activate([
