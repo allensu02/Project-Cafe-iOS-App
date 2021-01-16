@@ -42,6 +42,8 @@ class PCLabelSearchView: UIView {
         searchBar = UISearchBar()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.placeholder = "搜尋城市、捷運站、地區"
+        searchBar.layer.borderWidth = 0
+        searchBar.layer.borderColor = Colors.defaultBrown.cgColor
         addSubview(searchBar)
         NSLayoutConstraint.activate([
             searchBar.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 5),

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MapKit
 
 class FilterVC: UIViewController {
 
@@ -18,6 +19,7 @@ class FilterVC: UIViewController {
     var scrollView: UIScrollView!
     var contentView: UIView!
     var filterHeightAnchor: NSLayoutConstraint!
+    var locationManager: CLLocationManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,13 +134,19 @@ class FilterVC: UIViewController {
         for button in filterSectionView.filterButtons {
             button.addTarget(self, action: #selector(FilterSelected), for: .touchUpInside)
         }
+        filterSectionView.filterButtons[10].addTarget(self, action: #selector(openTimeSelected), for: .touchUpInside)
         filterSectionView.editButton.isHidden = true
         filterSectionView.moreButton.bringSubviewToFront(view)
         filterSectionView.moreButton.addTarget(self, action: #selector(filterMore), for: .touchUpInside)
 
     }
     
+    @objc func openTimeSelected () {
+        presentOpenTimePopUp()
+    }
+    
     @objc func FilterSelected(sender: PCIconButton!) {
+
         if (sender.isTapped) {
             sender.removeColor()
             sender.isTapped = false
@@ -152,8 +160,6 @@ class FilterVC: UIViewController {
     }
 
     @objc func filterMore() {
-        print("ran filtermore")
-        
         filterSectionView.expandFilter()
         filterHeightAnchor.constant = 430
         //filterSectionView.hideButton.addTarget(self, action: #selector(hideTapped), for: .touchUpInside)
@@ -186,6 +192,18 @@ class FilterVC: UIViewController {
             findButton.heightAnchor.constraint(equalToConstant: 40),
             findButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
+        findButton.addTarget(self, action: #selector(findTapped), for: .touchUpInside)
+    }
+    
+    @objc func findTapped() {
+        if (searchBarView.searchBar.text == "") {
+            presentPCAlertOnMainThread(title: "Location Required", message: "Please insert a location", buttonTitle: "Ok")
+        } else {
+            let resultsVC = ResultsVC()
+            locationManager = CLLocationManager()
+            resultsVC.initialLocation = locationManager.location
+            navigationController?.pushViewController(resultsVC, animated: true)
+        }
     }
 
     @objc func dismissKeyboard() {

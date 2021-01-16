@@ -22,7 +22,7 @@ class PCSecondaryLabel: UILabel {
     
     convenience init (fontSize: CGFloat) {
         self.init(frame: .zero)
-        self.font = Fonts.merriweather?.withSize(fontSize)
+        self.font = .systemFont(ofSize: fontSize, weight: .bold)
     }
     
     private func configure() {

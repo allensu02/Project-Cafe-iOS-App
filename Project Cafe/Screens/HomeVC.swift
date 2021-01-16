@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MapKit
 
 class HomeVC: UIViewController {
 
@@ -15,6 +16,8 @@ class HomeVC: UIViewController {
     var newButtonTwo: PCNewHomeScreenButton!
     var buttonTwo: PCHomeScreenButton!
     var stackView: UIStackView!
+    var locationManager: CLLocationManager!
+    
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
     }
@@ -82,7 +85,8 @@ class HomeVC: UIViewController {
 
     @objc func goToResults() {
         let resultsVC = ResultsVC()
-        print("hello")
+        locationManager = CLLocationManager()
+        resultsVC.initialLocation = locationManager.location
         navigationController?.pushViewController(resultsVC, animated: true)
     }
     

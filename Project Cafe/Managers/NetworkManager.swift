@@ -9,7 +9,7 @@ import UIKit
 
 class NetworkManager {
     static let shared = NetworkManager()
-    private let baseURL = "https://project-cafe-api-staging.herokuapp.com/api/cafes/?"
+    private let baseURL = "https://project-cafe-api-staging.herokuapp.com/api/search/?"
     private init () {}
 
     func getCafes(lat: Double, lon: Double, limit: Int, completed: @escaping (CafeResults) -> Void) {
@@ -20,7 +20,6 @@ class NetworkManager {
         }
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let data = data {
-                print("hey")
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 guard let cafeObj = try? decoder.decode(CafeResults.self, from: data) else {
@@ -30,7 +29,6 @@ class NetworkManager {
                 completed(cafeObj)
             }
         }.resume()
-        print("finsihed")
     }
     
 }

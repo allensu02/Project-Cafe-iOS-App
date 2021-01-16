@@ -28,6 +28,7 @@ enum Icons {
     static let horizontalLines = UIImage(systemName: "line.horizontal.3")!
     static let homeOneIcon = UIImage(named: "HomeIconOne")!
     static let homeTwoIcon = UIImage(named: "HomeIconTwo")!
+    static let mapPinIcon = UIImage(named: "mapPin")!
 }
 
 enum Colors {

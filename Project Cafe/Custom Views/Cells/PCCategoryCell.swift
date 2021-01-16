@@ -19,7 +19,6 @@ class PCCategoryCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         configure()
-        print("awoke")
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -40,7 +39,6 @@ class PCCategoryCell: UITableViewCell {
         configureIcon()
         configureLineIcon()
         configureLabel()
-        print("ran config")
         
         
     }
@@ -62,14 +60,11 @@ class PCCategoryCell: UITableViewCell {
     }
     
     func configureIcon() {
-        print("ran config icon")
         iconView = UIImageView()
        
         iconView.translatesAutoresizingMaskIntoConstraints = false
 
         containerView.addSubview(iconView)
-        print("ran config icon x2")
-
         
         NSLayoutConstraint.activate([
             iconView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
@@ -93,7 +88,6 @@ class PCCategoryCell: UITableViewCell {
             return
         default:
             iconView.image = Icons.relaxIcon
-            print("default ran")
         }
     }
     
