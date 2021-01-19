@@ -53,9 +53,11 @@ class HomeVC: UIViewController {
 //        buttonTwo.buttonLabel.text = "偏好篩選"
 //        buttonTwo.addTarget(self, action: #selector(goToFilterStrings), for: .touchUpInside)
         
-        newButtonOne = PCNewHomeScreenButton(icon: Icons.homeOneIcon, smallText: "偏好篩選", largeText: "我想找一家適合...", backgroundColor: Colors.homeOneColor)
+        newButtonOne = PCNewHomeScreenButton(icon: Icons.homeOneIcon, smallText: "偏好篩選", largeText: "我想找一家適合...", backgroundColor: Colors.navyBlue)
         newButtonOne.addTarget(self, action: #selector(goToFilter), for: .touchUpInside)
-        newButtonTwo = PCNewHomeScreenButton(icon: Icons.homeTwoIcon, smallText: "離我最近", largeText: "附近有什麼咖啡廳?", backgroundColor: Colors.homeTwoColor)
+        newButtonTwo = PCNewHomeScreenButton(icon: Icons.homeTwoIcon, smallText: "離我最近", largeText: "附近有什麼咖啡廳?", backgroundColor: Colors.lightBrown)
+        newButtonTwo.largeLabel.textColor = Colors.navyBlue
+        newButtonTwo.smallLabel.textColor = Colors.navyBlue
         newButtonTwo.addTarget(self, action: #selector(goToResults), for: .touchUpInside)
 
         stackView = UIStackView(arrangedSubviews: [newButtonOne, newButtonTwo])

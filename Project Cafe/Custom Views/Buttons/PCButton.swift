@@ -31,8 +31,7 @@ class PCButton: UIButton {
         titleLabel?.textAlignment = .center
         setTitleColor(.white, for: .normal)
         translatesAutoresizingMaskIntoConstraints = false
-        layer.borderColor = Colors.defaultBrown.cgColor
-        layer.borderWidth = 2
+        
     }
     
     func set(backgroundColor: UIColor, title: String) {

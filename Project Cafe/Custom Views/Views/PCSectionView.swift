@@ -56,7 +56,7 @@ class PCSectionView: UIView {
     
     func configureHeaderLabel() {
         headerLabel = PCTitleLabel(textAlignment: .left, fontSize: 30)
-        headerLabel.textColor = Colors.defaultBrown
+        headerLabel.textColor = Colors.navyBlue
         headerLabel.text = headerText
         addSubview(headerLabel)
         NSLayoutConstraint.activate([
@@ -72,7 +72,7 @@ class PCSectionView: UIView {
         editButton.translatesAutoresizingMaskIntoConstraints = false
         editButton.titleLabel?.text = "編輯"
         editButton.setTitle("編輯", for: .normal)
-        editButton.setTitleColor(Colors.defaultBrown, for: .normal)
+        editButton.setTitleColor(Colors.navyBlue, for: .normal)
         editButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         editButton.titleLabel?.textAlignment = .right
         addSubview(editButton)
@@ -107,7 +107,7 @@ class PCSectionView: UIView {
         moreButton.translatesAutoresizingMaskIntoConstraints = false
         moreButton.titleLabel?.text = "更多"
         moreButton.setTitle("更多", for: .normal)
-        moreButton.setTitleColor(Colors.defaultBrown, for: .normal)
+        moreButton.setTitleColor(Colors.navyBlue, for: .normal)
         moreButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         moreButton.titleLabel?.textAlignment = .right
         addSubview(moreButton)
@@ -161,7 +161,7 @@ class PCSectionView: UIView {
         hideButton = UIButton()
         hideButton.translatesAutoresizingMaskIntoConstraints = false
         hideButton.setTitle("收回", for: .normal)
-        hideButton.setTitleColor(Colors.defaultBrown, for: .normal)
+        hideButton.setTitleColor(Colors.navyBlue, for: .normal)
         hideButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         hideButton.titleLabel?.textAlignment = .right
         addSubview(hideButton)

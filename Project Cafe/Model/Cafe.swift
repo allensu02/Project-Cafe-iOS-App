@@ -35,7 +35,7 @@ struct Cafe: Codable {
     let name: String
     let city: String
     let address: String
-    let operatingHours: [OpeningHourPerDay]
+    let operatingHours: [OpeningHourPerDay]?
     let url: String?
     let distance: Double
     let latitude: Double
@@ -49,11 +49,12 @@ struct Cafe: Codable {
     let singleOrigin: Bool?
     let desserts: Bool?
     let meals: Bool?
-    let priceLevel: Int
-    //check with backend to see why those are doubles in the json
-    let seats: Int
-    let quietness: Int
-    let tastiness: Int
+    let priceLevel: Double?
+//    check with backend to see why those are doubles in the json
+    let seats: Double?
+    let quietness: Double?
+    let tastiness: Double?
+    let photos: String?
 }
 
 struct OpeningHourPerDay: Codable {

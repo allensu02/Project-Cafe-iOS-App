@@ -40,27 +40,27 @@ class PCIconButton: UIButton {
         configureIconView()
         configureLabel()
         isTapped = false
-        layer.borderColor = Colors.defaultBrown.cgColor
+        layer.borderColor = Colors.navyBlue.cgColor
         layer.borderWidth = 1
         layer.cornerRadius = 10
         setTitleColor(.red, for: .highlighted)
     }
     
     func addColor() {
-        layer.backgroundColor = Colors.pcOrange.cgColor
+        layer.backgroundColor = Colors.navyBlue.cgColor
         label?.textColor = .white
         iconView.tintColor = .white
     }
     
     func removeColor() {
         layer.backgroundColor = UIColor.white.cgColor
-        label?.textColor = Colors.defaultBrown
-        iconView.tintColor = Colors.defaultBrown
+        label?.textColor = Colors.navyBlue
+        iconView.tintColor = Colors.navyBlue
     }
     
     func configureIconView() {
         iconView = UIImageView(image: iconImage)
-        iconView.tintColor = Colors.defaultBrown
+        iconView.tintColor = Colors.navyBlue
         iconView.translatesAutoresizingMaskIntoConstraints = false
         iconView.contentMode = .scaleAspectFit
         addSubview(iconView)
@@ -75,7 +75,7 @@ class PCIconButton: UIButton {
     func configureLabel() {
         label = PCTitleLabel(textAlignment: .left, fontSize: 20)
         label.text = text
-        label.textColor = Colors.defaultBrown
+        label.textColor = Colors.navyBlue
         addSubview(label)
         NSLayoutConstraint.activate([
             label.centerYAnchor.constraint(equalTo: centerYAnchor),

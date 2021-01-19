@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func configureNC () -> UINavigationController {
         let firstNC = UINavigationController(rootViewController: HomeVC())
-        firstNC.navigationBar.tintColor = Colors.defaultBrown
+        firstNC.navigationBar.tintColor = Colors.navyBlue
         return firstNC
     }
 

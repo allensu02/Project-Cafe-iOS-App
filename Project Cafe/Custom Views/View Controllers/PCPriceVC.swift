@@ -1,27 +1,25 @@
 //
-//  PCOpeningHoursVC.swift
+//  PCPriceVC.swift
 //  Project Cafe
 //
-//  Created by Allen Su on 2021/1/13.
+//  Created by Allen Su on 2021/1/18.
 //
 
 import UIKit
 
-class PCOpeningHoursVC: UIViewController {
-    
+class PCPriceVC: UIViewController {
+
     let containerView   = PCAlertContainerView()
+    var moneyButtonOne: PCButton!
+    var moneyButtonTwo: PCButton!
+    var moneyButtonThree: PCButton!
     var iconView: UIImageView!
     var titleLabel: PCTitleLabel!
     var cancelButton: UIButton!
-    var dayButtons: [UIButton] = []
-    var dayButtonStackView: UIStackView!
-    var firstTextField: PCDatePickerTextField!
-    var secondTextField: PCDatePickerTextField!
-    var firstDoneButton: UIBarButtonItem!
-    var secondDoneButton: UIBarButtonItem!
-    var lineView: UIView!
     var clearButton: PCIconButton!
+    var lineView: UIView!
     var saveButton: PCIconButton!
+    var moneyButtons: [PCButton] = []
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -39,12 +37,58 @@ class PCOpeningHoursVC: UIViewController {
         configureIconView()
         configureCancelButton()
         configureLabel()
-        configureStackView()
-        configureTextFields()
         configureClearButton()
-        configureSaveButton()
+        configureMoneyButtons()
         configureLine()
+        configureSaveButton()
+        
     }
+    
+    func configureMoneyButtons() {
+        moneyButtonThree = PCButton(backgroundColor: .white, title: "$$$")
+        moneyButtonTwo = PCButton(backgroundColor: .white, title: "$$")
+        moneyButtonOne = PCButton(backgroundColor: .white, title: "$")
+        moneyButtons.append(moneyButtonThree)
+        moneyButtons.append(moneyButtonTwo)
+        moneyButtons.append(moneyButtonOne)
+
+        for button in moneyButtons {
+            button.titleLabel?.font = .systemFont(ofSize: 20, weight: .heavy)
+            button.setTitleColor(Colors.navyBlue, for: .normal)
+            button.layer.cornerRadius = 6
+            button.layer.borderWidth = 2
+            button.layer.borderColor = Colors.navyBlue.cgColor
+            button.addTarget(self, action: #selector(moneyTapped(_:)), for: .touchUpInside)
+            view.addSubview(button)
+        }
+        
+        
+        NSLayoutConstraint.activate([
+            moneyButtonThree.widthAnchor.constraint(equalToConstant: 90),
+            moneyButtonThree.heightAnchor.constraint(equalToConstant: 40),
+            moneyButtonThree.trailingAnchor.constraint(equalTo: cancelButton.trailingAnchor, constant: -5),
+            moneyButtonThree.topAnchor.constraint(equalTo: cancelButton.bottomAnchor, constant: 50),
+            
+            moneyButtonTwo.trailingAnchor.constraint(equalTo: moneyButtonThree.leadingAnchor, constant: 10),
+            moneyButtonTwo.widthAnchor.constraint(equalToConstant: 90),
+            moneyButtonTwo.heightAnchor.constraint(equalToConstant: 40),
+            moneyButtonTwo.topAnchor.constraint(equalTo: cancelButton.bottomAnchor, constant: 50),
+            
+            moneyButtonOne.trailingAnchor.constraint(equalTo: moneyButtonTwo.leadingAnchor, constant: 10),
+            moneyButtonOne.widthAnchor.constraint(equalToConstant: 90),
+            moneyButtonOne.heightAnchor.constraint(equalToConstant: 40),
+            moneyButtonOne.topAnchor.constraint(equalTo: cancelButton.bottomAnchor, constant: 50),
+        ])
+        
+    }
+    
+    @objc func moneyTapped(_ sender: PCButton) {
+        resetButtons()
+        sender.backgroundColor = Colors.navyBlue
+        sender.setTitleColor(.white, for: .normal)
+        
+    }
+    
     
     func configureContainerView() {
         view.addSubview(containerView)
@@ -87,10 +131,14 @@ class PCOpeningHoursVC: UIViewController {
         cancelButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
     }
     
+    @objc func dismissVC() {
+        dismiss(animated: true)
+    }
+    
     func configureLabel() {
         titleLabel = PCTitleLabel(textAlignment: .left, fontSize: 20)
         titleLabel.font = .systemFont(ofSize: 20, weight: .black)
-        titleLabel.text = "營業時間"
+        titleLabel.text = "價位"
         view.addSubview(titleLabel)
         
         NSLayoutConstraint.activate([
@@ -99,79 +147,6 @@ class PCOpeningHoursVC: UIViewController {
             titleLabel.heightAnchor.constraint(equalToConstant: 25),
             titleLabel.trailingAnchor.constraint(equalTo: cancelButton.leadingAnchor, constant: -10)
         ])
-    }
-    
-    func configureStackView() {
-        for num in 1 ... 7 {
-            var dayButton = UIButton()
-            dayButton.translatesAutoresizingMaskIntoConstraints = false
-            dayButton.layer.cornerRadius = 15
-            dayButton.backgroundColor = .systemGray5
-            dayButton.titleLabel?.font = .systemFont(ofSize: 20, weight: .black)
-            dayButton.setTitleColor(Colors.navyBlue, for: .normal)
-            dayButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
-            dayButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
-            dayButton.addTarget(self, action: #selector(dayTapped(_:)), for: .touchUpInside)
-            switch num {
-            case 1: dayButton.setTitle("日", for: .normal); break
-            case 2: dayButton.setTitle("一", for: .normal); break
-            case 3: dayButton.setTitle("二", for: .normal); break
-            case 4: dayButton.setTitle("三", for: .normal); break
-            case 5: dayButton.setTitle("四", for: .normal); break
-            case 6: dayButton.setTitle("五", for: .normal); break
-            case 7: dayButton.setTitle("六", for: .normal); break
-            default:
-                break
-            }
-            dayButtons.append(dayButton)
-        }
-        dayButtonStackView = UIStackView(arrangedSubviews: dayButtons)
-        dayButtonStackView.translatesAutoresizingMaskIntoConstraints = false
-        dayButtonStackView.axis = .horizontal
-        dayButtonStackView.distribution = .fillEqually
-        dayButtonStackView.spacing = 3
-        view.addSubview(dayButtonStackView)
-        
-        NSLayoutConstraint.activate([
-            dayButtonStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15),
-            dayButtonStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
-            dayButtonStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
-            dayButtonStackView.heightAnchor.constraint(equalToConstant: 30)
-        ])
-    }
-    
-    @objc func dayTapped(_ sender: UIButton) {
-        if (compareColors(c1: sender.backgroundColor!, c2: UIColor.systemGray5)) {
-            sender.backgroundColor = Colors.navyBlue
-            sender.setTitleColor(.white, for: .normal)
-        } else {
-            sender.backgroundColor = UIColor.systemGray5
-            sender.setTitleColor(Colors.navyBlue, for: .normal)
-        }
-    }
-    func configureTextFields() {
-        firstDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePressed))
-        firstTextField = PCDatePickerTextField(doneButton: firstDoneButton)
-        view.addSubview(firstTextField)
-        
-        secondDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePressed))
-        secondTextField = PCDatePickerTextField(doneButton: secondDoneButton)
-        view.addSubview(secondTextField)
-        NSLayoutConstraint.activate([
-            firstTextField.topAnchor.constraint(equalTo: dayButtonStackView.bottomAnchor, constant: 20),
-            firstTextField.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
-            firstTextField.widthAnchor.constraint(equalToConstant: 110),
-            firstTextField.heightAnchor.constraint(equalToConstant: 30),
-            
-            secondTextField.topAnchor.constraint(equalTo: dayButtonStackView.bottomAnchor, constant: 20),
-            secondTextField.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
-            secondTextField.widthAnchor.constraint(equalToConstant: 110),
-            secondTextField.heightAnchor.constraint(equalToConstant: 30)
-        ])
-    }
-    
-    @objc func donePressed(_ sender: UIBarButtonItem) {
-        view.endEditing(true)
     }
     
     func configureClearButton () {
@@ -188,14 +163,15 @@ class PCOpeningHoursVC: UIViewController {
     }
     
     @objc func clearTapped() {
-        for button in dayButtons {
-            button.backgroundColor = UIColor.systemGray5
-            button.setTitleColor(Colors.navyBlue, for: .normal)
-        }
-        firstTextField.text = ""
-        secondTextField.text = ""
+        resetButtons()
     }
     
+    func resetButtons() {
+        for button in moneyButtons {
+            button.backgroundColor = UIColor.white
+            button.setTitleColor(Colors.navyBlue, for: .normal)
+        }
+    }
     func configureSaveButton () {
         saveButton = PCIconButton(iconImage: Icons.storeIcon, title: "儲存")
         saveButton.layer.cornerRadius = 6
@@ -221,14 +197,10 @@ class PCOpeningHoursVC: UIViewController {
         lineView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            lineView.topAnchor.constraint(equalTo: firstTextField.bottomAnchor, constant: 15),
+            lineView.topAnchor.constraint(equalTo: moneyButtonThree.bottomAnchor, constant: 15),
             lineView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             lineView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             lineView.heightAnchor.constraint(equalToConstant: 1)
         ])
-    }
-    
-    @objc func dismissVC() {
-        dismiss(animated: true)
     }
 }

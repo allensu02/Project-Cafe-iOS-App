@@ -23,7 +23,7 @@ class NetworkManager {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 guard let cafeObj = try? decoder.decode(CafeResults.self, from: data) else {
-                    print("error occured")
+                    print("error hereee")
                     return
                 }
                 completed(cafeObj)

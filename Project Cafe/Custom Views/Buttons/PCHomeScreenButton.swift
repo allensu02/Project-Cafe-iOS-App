@@ -32,7 +32,7 @@ class PCHomeScreenButton: UIButton {
     func configure() {
         layer.cornerRadius = 20
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = Colors.defaultBrown
+        backgroundColor = Colors.navyBlue
         configureStackView()
     }
     

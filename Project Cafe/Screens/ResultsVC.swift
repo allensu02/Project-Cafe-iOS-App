@@ -68,7 +68,6 @@ class ResultsVC: UISearchController {
         case .authorizedAlways:
             break
         case .authorizedWhenInUse:
-            initialLocation = locationManager.location
             startTrackingUserLocation()
             break
         }
@@ -90,13 +89,6 @@ class ResultsVC: UISearchController {
         let region = MKCoordinateRegion.init(center: initialLocation.coordinate, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
         mapView.setRegion(region, animated: true)
         
-    }
-    
-    private func getCenterLocation(for mapView: MKMapView) -> CLLocation {
-        var latitude = mapView.centerCoordinate.latitude
-        var longitude = mapView.centerCoordinate.longitude
-        
-        return CLLocation(latitude: latitude, longitude: longitude)
     }
     
     func configureMap() {
@@ -176,9 +168,9 @@ extension ResultsVC: MKMapViewDelegate {
         }
         
         if let placeAnnotation = annotation as? CafeOnMap {
-            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "InterestingPlace") as? MKMarkerAnnotationView
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "Cafe") as? MKMarkerAnnotationView
             if annotationView == nil {
-                annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "InterestingPlace")
+                annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "Cafe")
                 annotationView?.canShowCallout = true
                 annotationView?.clusteringIdentifier = "cluster"
             } else {

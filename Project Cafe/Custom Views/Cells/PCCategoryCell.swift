@@ -72,7 +72,7 @@ class PCCategoryCell: UITableViewCell {
             iconView.heightAnchor.constraint(equalToConstant: 30),
             iconView.widthAnchor.constraint(equalToConstant: 30)
         ])
-        iconView.tintColor = Colors.defaultBrown
+        iconView.tintColor = Colors.navyBlue
         switch category {
         case .drinkCoffee:
             iconView.image = Icons.coffeeIcon

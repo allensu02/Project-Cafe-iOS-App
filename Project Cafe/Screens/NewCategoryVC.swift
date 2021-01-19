@@ -69,7 +69,7 @@ class NewCategoryVC: UIViewController {
     }
     
     func configureSaveButton() {
-        saveButton = PCButton(backgroundColor: Colors.defaultBrown, title: "儲存新類別")
+        saveButton = PCButton(backgroundColor: Colors.lightBrown, title: "儲存新類別")
         view.addSubview(saveButton)
         NSLayoutConstraint.activate([
             saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),

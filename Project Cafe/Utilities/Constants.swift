@@ -29,9 +29,12 @@ enum Icons {
     static let homeOneIcon = UIImage(named: "HomeIconOne")!
     static let homeTwoIcon = UIImage(named: "HomeIconTwo")!
     static let mapPinIcon = UIImage(named: "mapPin")!
+    static let mapPinLogoIcon = UIImage(systemName: "mappin.and.ellipse")!
 }
 
 enum Colors {
+    static let navyBlue = UIColor(red: 46/255, green: 60/255, blue: 73/255, alpha: 1)
+    static let lightBrown = UIColor(red: 235/255, green: 221/255, blue: 194/255, alpha: 1)
     static let defaultBrown = UIColor(red: 128/255, green: 54/255, blue: 2/255, alpha: 1)
     static let pcOrange = UIColor(red: 0.976, green: 0.506, blue: 0.259, alpha: 1)
     static let homeOneColor = UIColor(red: 46/255, green: 50/255, blue: 73/255, alpha: 1)

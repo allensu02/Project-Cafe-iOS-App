@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 
 class FilterVC: UIViewController {
-
+    
     var searchBarView: PCLabelSearchView!
     var stackView: UIStackView!
     var categorySectionView: PCSectionView!
@@ -20,6 +20,9 @@ class FilterVC: UIViewController {
     var contentView: UIView!
     var filterHeightAnchor: NSLayoutConstraint!
     var locationManager: CLLocationManager!
+    var locationToSearch: CLLocation!
+    
+    private let completer = MKLocalSearchCompleter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,13 +70,18 @@ class FilterVC: UIViewController {
     func configureSearchBar() {
         searchBarView = PCLabelSearchView()
         contentView.addSubview(searchBarView)
-        
+        searchBarView.mapButton.addTarget(self, action: #selector(mapButtonTapped), for: .touchUpInside)
+        searchBarView.searchBar.searchTextField.delegate = self
         NSLayoutConstraint.activate([
             searchBarView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
             searchBarView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             searchBarView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             searchBarView.heightAnchor.constraint(equalToConstant: 90)
         ])
+    }
+    
+    @objc func mapButtonTapped() {
+        navigationController?.pushViewController(MapVC(), animated: true)
     }
     
     func configureCategoryView() {
@@ -85,7 +93,7 @@ class FilterVC: UIViewController {
             categorySectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             categorySectionView.heightAnchor.constraint(equalToConstant: 200)
         ])
-
+        
         for button in categorySectionView.categoryButtons {
             button.addTarget(self, action: #selector(categorySelected) , for: .touchUpInside)
         }
@@ -97,7 +105,7 @@ class FilterVC: UIViewController {
     @objc func categorySelected(sender: PCCategoryButton!) {
         resetButtons()
         sender.addColor()
-        
+        sender.isTapped = true
         currentCategory = sender
         for button in filterSectionView.filterButtons {
             if currentCategory.filterList.contains(button.filter!) {
@@ -105,7 +113,7 @@ class FilterVC: UIViewController {
                 button.isTapped = true
             }
         }
-
+        
     }
     
     @objc func categoryEdit() {
@@ -135,30 +143,46 @@ class FilterVC: UIViewController {
             button.addTarget(self, action: #selector(FilterSelected), for: .touchUpInside)
         }
         filterSectionView.filterButtons[10].addTarget(self, action: #selector(openTimeSelected), for: .touchUpInside)
+        filterSectionView.filterButtons[6].addTarget(self, action: #selector(priceSelected), for: .touchUpInside)
         filterSectionView.editButton.isHidden = true
         filterSectionView.moreButton.bringSubviewToFront(view)
         filterSectionView.moreButton.addTarget(self, action: #selector(filterMore), for: .touchUpInside)
-
+        
     }
     
     @objc func openTimeSelected () {
-        presentOpenTimePopUp()
+        presentPopUp(vc: PCOpeningHoursVC())
+    }
+    
+    @objc func priceSelected() {
+        presentPopUp(vc: PCPriceVC())
     }
     
     @objc func FilterSelected(sender: PCIconButton!) {
-
+        
         if (sender.isTapped) {
             sender.removeColor()
             sender.isTapped = false
-            for button in categorySectionView.categoryButtons {
-                button.removeColor()
+            var allFalse = true
+            for button in filterSectionView.filterButtons {
+                if (sender.isTapped) {
+                    allFalse = false
+                }
+                if (allFalse) {
+                    for button in categorySectionView.categoryButtons {
+                        button.removeColor()
+                        button.isTapped = false
+                    }
+                }
             }
         } else {
             sender.addColor()
             sender.isTapped = true
         }
+        
+        
     }
-
+    
     @objc func filterMore() {
         filterSectionView.expandFilter()
         filterHeightAnchor.constant = 430
@@ -183,7 +207,8 @@ class FilterVC: UIViewController {
     }
     
     func configureFindButton() {
-        findButton = PCButton(backgroundColor: Colors.defaultBrown, title: "找咖啡廳！")
+        findButton = PCButton(backgroundColor: Colors.lightBrown, title: "找咖啡廳！")
+        findButton.setTitleColor(Colors.navyBlue, for: .normal)
         contentView.addSubview(findButton)
         NSLayoutConstraint.activate([
             findButton.topAnchor.constraint(equalTo: filterSectionView.bottomAnchor, constant: 20),
@@ -201,13 +226,26 @@ class FilterVC: UIViewController {
         } else {
             let resultsVC = ResultsVC()
             locationManager = CLLocationManager()
-            resultsVC.initialLocation = locationManager.location
+            resultsVC.initialLocation = locationToSearch
             navigationController?.pushViewController(resultsVC, animated: true)
         }
     }
-
+    
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-   
+    
+}
+
+extension FilterVC: UISearchTextFieldDelegate{
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        guard let query = textField.text else {
+            if completer.isSearching {
+                completer.cancel()
+            }
+            return
+        }
+        completer.queryFragment = query
+        
+    }
 }

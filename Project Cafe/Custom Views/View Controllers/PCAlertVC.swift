@@ -12,7 +12,7 @@ class PCAlertVC: UIViewController {
     let containerView   = PCAlertContainerView()
     let titleLabel      = PCTitleLabel(textAlignment: .center, fontSize: 20)
     let messageLabel    = PCBodyLabel(textAlignment: .center)
-    let actionButton    = PCButton(backgroundColor: .systemPink, title: "Ok")
+    let actionButton    = PCButton(backgroundColor: Colors.navyBlue, title: "Ok")
     
     var alertTitle: String?
     var message: String?
