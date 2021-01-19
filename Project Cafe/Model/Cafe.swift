@@ -22,7 +22,8 @@ class CafeOnMap: NSObject, MKAnnotation {
     //let discipline: String?
     init (cafe: Cafe) {
         self.cafe = cafe
-        coordinate = CLLocationCoordinate2D(latitude: cafe.latitude, longitude: cafe.longitude)
+        //FIX THIS, DONT FORCE UNWRAP
+        coordinate = CLLocationCoordinate2D(latitude: cafe.latitude!, longitude: cafe.longitude!)
         self.title = cafe.name
         self.locationName = cafe.address
         
@@ -32,33 +33,33 @@ class CafeOnMap: NSObject, MKAnnotation {
     
 }
 struct Cafe: Codable {
-    let name: String
-    let city: String
-    let address: String
+    let name: String?
+    let city: String?
+    let address: String?
     let operatingHours: [OpeningHourPerDay]?
     let url: String?
-    let distance: Double
-    let latitude: Double
-    let longitude: Double
-    let mrtStation: String
-    let wifi: Bool
-    let timeLimit: Bool
-    let plugs: Bool
-    let nearMrt: Bool
-    let pourOver: Bool
+    let distance: Double?
+    let latitude: Double?
+    let longitude: Double?
+    let mrtStation: String?
+    let wifi: Bool?
+    let timeLimit: Bool?
+    let plugs: Bool?
+    let nearMrt: Bool?
+    let pourOver: Bool?
     let singleOrigin: Bool?
     let desserts: Bool?
     let meals: Bool?
-    let priceLevel: Double?
+    let priceLevel: Int?
 //    check with backend to see why those are doubles in the json
     let seats: Double?
     let quietness: Double?
     let tastiness: Double?
-    let photos: String?
+    let photos: [String]?
 }
 
 struct OpeningHourPerDay: Codable {
-    let dayOfWeek: Int
+    let dayOfWeek: Int?
     let startTime: String?
     let endTime: String?
 }
