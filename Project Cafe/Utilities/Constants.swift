@@ -30,6 +30,7 @@ enum Icons {
     static let homeTwoIcon = UIImage(named: "HomeIconTwo")!
     static let mapPinIcon = UIImage(named: "mapPin")!
     static let mapPinLogoIcon = UIImage(systemName: "mappin.and.ellipse")!
+    static let listIcon = UIImage(systemName: "list.bullet")!
 }
 
 enum Colors {
@@ -51,3 +52,6 @@ enum Fonts {
     static let merriweather = UIFont(name: "Merriweather-Regular", size: 25)
 }
 
+enum Numbers {
+    static let cardViewHeight = CGFloat(280)
+}

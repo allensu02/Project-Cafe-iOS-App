@@ -32,6 +32,7 @@ class HomeVC: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
         configureButton()
+        //tempAddCard()
     }
     
     func configureTopView() {
@@ -94,6 +95,19 @@ class HomeVC: UIViewController {
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+    
+    func tempAddCard() {
+        let pcCardView = PCCafeCardView()
+        
+        view.addSubview(pcCardView)
+        pcCardView.set(cafe: Cafe(name: "Big Cafe", city: "Taipei", address: nil, operatingHours: nil, url: nil, distance: 300, latitude: 120, longitude: 120, mrtStation: "Blah blah", wifi: true, timeLimit: true, plugs: true, nearMrt: true, pourOver: false, singleOrigin: true, desserts: true, meals: true, priceLevel: 3, seats: 4, quietness: 3, tastiness: 4, photos: nil))
+        NSLayoutConstraint.activate([
+            pcCardView.heightAnchor.constraint(equalToConstant: Numbers.cardViewHeight),
+            pcCardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            pcCardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            pcCardView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20)
+        ])
     }
     
 }

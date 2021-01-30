@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 
 
-class ResultsVC: UISearchController {
+class ResultsVC: PCDataLoadingVC {
     
     var refreshButton: UIButton!
     var tempLabel: PCTitleLabel!
@@ -18,7 +18,10 @@ class ResultsVC: UISearchController {
     let regionInMeters: Double = 1000
     var previousLocation: CLLocation!
     var initialLocation: CLLocation!
-    
+    var cardView: PCCafeCardView!
+    var listButton: UIBarButtonItem!
+    var totalCafeList: [Cafe] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.delegate = self
@@ -29,28 +32,56 @@ class ResultsVC: UISearchController {
         addCafes(location: initialLocation)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.barTintColor = Colors.navyBlue
+        title = "Results"
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        navigationController?.navigationBar.isHidden = true
+    }
     func configureUI() {
         navigationController?.navigationBar.isHidden = true
         view.backgroundColor = .systemBackground
         configureMap()
+        configureCardView()
         configureRefreshButton()
+        configureListButton()
     }
     
+    func configureCardView() {
+        cardView = PCCafeCardView(frame: .zero)
+        view.addSubview(cardView)
+        
+        NSLayoutConstraint.activate([
+            cardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            cardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            cardView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            cardView.heightAnchor.constraint(equalToConstant: Numbers.cardViewHeight)
+        ])
+    }
     func addCafes(location: CLLocation) {
         print("ran add cafes")
+        showLoadingView()
         NetworkManager.shared.getCafes(lat: location.coordinate.latitude, lon: location.coordinate.longitude, limit: 15) { (data) in
             print("running in closure")
             let cafeList = data.results
             var cafeAnnotations: [CafeOnMap] = []
             for cafe in cafeList {
-                let testCafe = CafeOnMap(cafe: cafe)
-                cafeAnnotations.append(testCafe)
+                let thisCafe = CafeOnMap(cafe: cafe)
+                cafeAnnotations.append(thisCafe)
             }
+            self.totalCafeList.insert(contentsOf: cafeList, at: 0)
             DispatchQueue.main.async {
                 self.mapView.addAnnotations(cafeAnnotations)
+                self.cardView.set(cafe: cafeAnnotations[0].cafe)
                 self.refreshButton.isHidden = true
                 print("updated annotations")
             }
+            self.dismissLoadingView()
         }
     }
     
@@ -145,6 +176,18 @@ extension ResultsVC: CLLocationManagerDelegate {
         print("\(error.localizedDescription)")
     }
     
+    func configureListButton() {
+        listButton = UIBarButtonItem(image: Icons.listIcon, style: .plain, target: self, action: #selector(listPressed))
+        navigationItem.rightBarButtonItem = listButton
+        listButton.tintColor = .white
+    }
+    
+    @objc func listPressed() {
+        let listResultsVC = ListResultsVC()
+        listResultsVC.cafeList = totalCafeList
+        navigationController?.pushViewController(listResultsVC, animated: true)
+    }
+    
     
 }
 
@@ -187,7 +230,9 @@ extension ResultsVC: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        print(view.annotation?.title)
+        if let cafeAnnotation = view.annotation as? CafeOnMap {
+            cardView.set(cafe: cafeAnnotation.cafe)
+        }
     }
     
     

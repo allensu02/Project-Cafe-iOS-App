@@ -21,12 +21,16 @@ class FilterVC: UIViewController {
     var filterHeightAnchor: NSLayoutConstraint!
     var locationManager: CLLocationManager!
     var locationToSearch: CLLocation!
+    var resultsTableView: UITableView!
+    var locationResults: [MKLocalSearchCompletion] = []
     
     private let completer = MKLocalSearchCompleter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        configureCompleter()
+
     }
     
     func configureUI() {
@@ -42,7 +46,12 @@ class FilterVC: UIViewController {
         configureCategoryView()
         configureFilterView()
         configureFindButton()
-        
+        //configureTableView()
+    }
+    
+    func configureCompleter() {
+        completer.delegate = self
+        completer.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 23.763081283843682, longitude: 120.99124358282349), latitudinalMeters: 100000, longitudinalMeters: 100000)
     }
     
     func configureScrollView() {
@@ -150,6 +159,23 @@ class FilterVC: UIViewController {
         
     }
     
+    func configureTableView() {
+        resultsTableView = UITableView()
+        resultsTableView.translatesAutoresizingMaskIntoConstraints = false
+        resultsTableView.delegate = self
+        resultsTableView.dataSource = self
+        resultsTableView.rowHeight = 50
+        resultsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "myIdentifier")
+        
+        view.addSubview(resultsTableView)
+        NSLayoutConstraint.activate([
+            resultsTableView.topAnchor.constraint(equalTo: searchBarView.bottomAnchor),
+            resultsTableView.leadingAnchor.constraint(equalTo: searchBarView.searchBar.leadingAnchor),
+            resultsTableView.trailingAnchor.constraint(equalTo: searchBarView.searchBar.trailingAnchor),
+            resultsTableView.heightAnchor.constraint(equalToConstant: 150)
+        ])
+    }
+    
     @objc func openTimeSelected () {
         presentPopUp(vc: PCOpeningHoursVC())
     }
@@ -245,7 +271,40 @@ extension FilterVC: UISearchTextFieldDelegate{
             }
             return
         }
+        print("ran queryfrag")
+        resultsTableView.isHidden = false
         completer.queryFragment = query
-        
+        DispatchQueue.main.async {
+            self.resultsTableView.reloadData()
+        }
+
     }
+}
+
+extension FilterVC: MKLocalSearchCompleterDelegate {
+    func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
+        print("ran update reult")
+        for result in completer.results {
+            print(result.description)
+            locationResults.append(result)
+        }
+    }
+    
+    func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
+        print(error.localizedDescription)
+    }
+}
+
+extension FilterVC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return locationResults.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "myIdentifier", for: indexPath)
+        cell.textLabel?.text = locationResults[indexPath.row].title
+        return cell
+    }
+    
+    
 }
