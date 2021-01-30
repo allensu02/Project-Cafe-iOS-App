@@ -16,28 +16,26 @@ class PCCafeListCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
     
-    init (style: UITableViewCell.CellStyle, reuseIdentifier: String?, cafe: Cafe) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.cafe = cafe
-        configure()
-    }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure() {
+    func configure(cafe: Cafe) {
+        self.cafe = cafe
         configureCardView()
+        cardView.setAttributes()
+        backgroundColor = .systemGray4
     }
     
     func configureCardView() {
         cardView = PCCafeCardView(cafe: cafe)
         addSubview(cardView)
         NSLayoutConstraint.activate([
-            cardView.topAnchor.constraint(equalTo: topAnchor),
+            cardView.centerYAnchor.constraint(equalTo: centerYAnchor),
             cardView.leadingAnchor.constraint(equalTo: leadingAnchor),
             cardView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            cardView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            cardView.heightAnchor.constraint(equalToConstant: Numbers.cardViewHeight)
         ])
+        
     }
 }

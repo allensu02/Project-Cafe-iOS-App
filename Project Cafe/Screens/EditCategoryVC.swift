@@ -71,7 +71,7 @@ extension EditCategoryVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "catCell") as? PCCategoryCell else {
-            print("error here")
+            print("error with category cell")
             return UITableViewCell()
         }
         if indexPath.row == 1 {
