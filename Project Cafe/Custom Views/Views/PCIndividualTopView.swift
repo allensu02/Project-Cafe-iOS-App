@@ -1,26 +1,25 @@
 //
-//  PCCafeCardView.swift
+//  PCIndividualTopView.swift
 //  Project Cafe
 //
-//  Created by Allen Su on 2021/1/26.
+//  Created by Allen Su on 2021/2/5.
 //
 
 import UIKit
 
-class PCCafeCardView: UIView {
+class PCIndividualTopView: UIView {
 
-    var cafe: Cafe!
     var imageView: UIImageView!
     var nameLabel: PCTitleLabel!
-    var openTimeLabel: PCTitleLabel!
-    var distanceLabel: PCTitleLabel!
-    var activeFilters: [PCFilterButton] = []
     var scrollView: UIScrollView!
+    var cafe: Cafe!
     var containerView: UIStackView!
     var currentOffset = 10
+    var activeFilters: [PCFilterButton] = []
+    var mapButton: PCButton!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
     }
     
     required init?(coder: NSCoder) {
@@ -30,60 +29,21 @@ class PCCafeCardView: UIView {
     init(cafe: Cafe) {
         super.init(frame: .zero)
         self.cafe = cafe
+        backgroundColor = .systemBackground
         configure()
-    }
-    
-    func set(cafe: Cafe) {
-        self.cafe = cafe
-        clearAttributes()
-        setAttributes()
-        
+        translatesAutoresizingMaskIntoConstraints = false
     }
     
     func configure() {
-        translatesAutoresizingMaskIntoConstraints = false
-        layer.cornerRadius = 20
-        clipsToBounds = true
-        backgroundColor = .white
         configureImageView()
         configureNameLabel()
-        configureOpenTimeLabel()
-        configureDistanceLabel()
         configureFilterScrollView()
+        configureMapButton()
     }
-    
-    func clearAttributes() {
-        imageView.image = Images.cafePlaceholderImage
-        nameLabel.text = ""
-        openTimeLabel.text = ""
-        distanceLabel.text = ""
-        for button in containerView.subviews {
-            button.removeFromSuperview()
-        }
-        currentOffset = 10
-        activeFilters = []
-    }
-    
-    func setAttributes () {
-        
-        nameLabel.text = cafe.name
-        openTimeLabel.text = "operating hours"
-        guard let distance = cafe.distance else { return }
-        distanceLabel.text = "Distance: \(distance)"
-        configureContainerView()
-        scrollView.contentSize = CGSize(width: currentOffset, height: 40)
-        containerView.reloadInputViews()
-        guard let urlList = cafe.photos else { return }
-        if (urlList.count == 0) {
-            return
-        }
-        guard let url = URL(string: urlList[0]) else { return }
-        downloadImage(from: url)
-        
-    }
-    
+
     func configureImageView() {
         imageView = UIImageView()
+        imageView.image = Images.cafePlaceholderImage
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -93,56 +53,21 @@ class PCCafeCardView: UIView {
             imageView.topAnchor.constraint(equalTo: topAnchor),
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: 120)
+            imageView.heightAnchor.constraint(equalToConstant: 170)
         ])
     }
     
-    func downloadImage(from url: URL) {
-        getData(from: url) { data, response, error in
-            guard let data = data, error == nil else { return }
-            DispatchQueue.main.async() { [weak self] in
-                self!.imageView.image = UIImage(data: data)
-            }
-        }
-    }
-    
-    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
-    }
-    
     func configureNameLabel() {
-        nameLabel = PCTitleLabel(textAlignment: .left, fontSize: 25)
+        nameLabel = PCTitleLabel(textAlignment: .left, fontSize: 30)
+        nameLabel.text = cafe.name
+
         addSubview(nameLabel)
         
         NSLayoutConstraint.activate([
             nameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10),
             nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            nameLabel.heightAnchor.constraint(equalToConstant: 28)
-        ])
-    }
-    
-    func configureOpenTimeLabel() {
-        openTimeLabel = PCTitleLabel(textAlignment: .left, fontSize: 20)
-        addSubview(openTimeLabel)
-        
-        NSLayoutConstraint.activate([
-            openTimeLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5),
-            openTimeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            openTimeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            openTimeLabel.heightAnchor.constraint(equalToConstant: 22)
-        ])
-    }
-    
-    func configureDistanceLabel() {
-        distanceLabel = PCTitleLabel(textAlignment: .left, fontSize: 20)
-        addSubview(distanceLabel)
-        
-        NSLayoutConstraint.activate([
-            distanceLabel.topAnchor.constraint(equalTo: openTimeLabel.bottomAnchor, constant: 5),
-            distanceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            distanceLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            distanceLabel.heightAnchor.constraint(equalToConstant: 22)
+            nameLabel.heightAnchor.constraint(equalToConstant: 35)
         ])
     }
     
@@ -158,12 +83,27 @@ class PCCafeCardView: UIView {
         addSubview(scrollView)
         
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: distanceLabel.bottomAnchor, constant: 5),
+            scrollView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5),
             scrollView.heightAnchor.constraint(equalToConstant: 50),
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
         ])
+        scrollView.contentSize = CGSize(width: currentOffset, height: 40)
+        containerView.reloadInputViews()
+    }
+    
+    func configureMapButton() {
+        mapButton = PCButton(backgroundColor: .systemGray4, title: "看地圖")
+        mapButton.setTitleColor(.black, for: .normal)
         
+        addSubview(mapButton)
+        
+        NSLayoutConstraint.activate([
+            mapButton.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 5),
+            mapButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            mapButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            mapButton.heightAnchor.constraint(equalToConstant: 40)
+        ])
     }
     
     func configureContainerView() {
@@ -224,6 +164,4 @@ class PCCafeCardView: UIView {
             activeFilters.append(PCFilterButton(iconImage: Icons.foodIcon, filter: .meals))
         }
     }
-
 }
-

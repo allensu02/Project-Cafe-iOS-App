@@ -37,6 +37,7 @@ class HomeVC: UIViewController {
     
     func configureTopView() {
         topView = PCHomeTopView()
+        topView.searchBar.delegate = self
         view.addSubview(topView)
         NSLayoutConstraint.activate([
             topView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -101,7 +102,7 @@ class HomeVC: UIViewController {
         let pcCardView = PCCafeCardView()
         
         view.addSubview(pcCardView)
-        pcCardView.set(cafe: Cafe(name: "Big Cafe", city: "Taipei", address: nil, operatingHours: nil, url: nil, distance: 300, latitude: 120, longitude: 120, mrtStation: "Blah blah", wifi: true, timeLimit: true, plugs: true, nearMrt: true, pourOver: false, singleOrigin: true, desserts: true, meals: true, priceLevel: 3, seats: 4, quietness: 3, tastiness: 4, photos: nil))
+        pcCardView.set(cafe: Cafe(name: "Big Cafe", city: "Taipei", address: nil, operatingHours: nil, openNow: true, url: nil, distance: 300, latitude: 120, longitude: 120, mrtStation: "Blah blah", wifi: true, timeLimit: true, plugs: true, nearMrt: true, pourOver: false, singleOrigin: true, desserts: true, meals: true, priceLevel: 3, seats: 4, quietness: 3, tastiness: 4, photos: nil))
         NSLayoutConstraint.activate([
             pcCardView.heightAnchor.constraint(equalToConstant: Numbers.cardViewHeight),
             pcCardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -112,3 +113,26 @@ class HomeVC: UIViewController {
     
 }
 
+
+extension HomeVC: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let listResultsVC = ListResultsVC()
+        if (searchBar.text == nil || searchBar.text == "") {
+            presentPCAlertOnMainThread(title: "未輸入店名!", message: "請輸入您想搜尋的店名. ☕", buttonTitle: "好")
+            return
+        }
+        isEditing = false
+        NetworkManager.shared.getCafes(keyword: searchBar.text!, limit: 15) { (data) in
+            let cafeResults = data.results
+            DispatchQueue.main.async {
+                let listResultsVC = ListResultsVC()
+                listResultsVC.cafeList = cafeResults
+                listResultsVC.configure()
+                self.navigationController?.pushViewController(listResultsVC, animated: true)
+                searchBar.text = ""
+            }
+            
+        }
+        print("yuh")
+    }
+}

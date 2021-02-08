@@ -14,8 +14,6 @@ class ListResultsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configure()
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,9 +67,13 @@ extension ListResultsVC: UITableViewDelegate, UITableViewDataSource {
         }
         
         cell.configure(cafe: cafeList[indexPath.row])
-        
         return cell
     }
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let individualCafeVC = IndividualCafeVC()
+        individualCafeVC.cafe = cafeList[indexPath.row]
+        individualCafeVC.configureUI()
+        navigationController?.pushViewController(individualCafeVC, animated: true)
+    }
 }

@@ -35,6 +35,7 @@ class ResultsVC: PCDataLoadingVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.navigationBar.barTintColor = Colors.navyBlue
         title = "Results"
     }
@@ -62,6 +63,16 @@ class ResultsVC: PCDataLoadingVC {
             cardView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
             cardView.heightAnchor.constraint(equalToConstant: Numbers.cardViewHeight)
         ])
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(cardTapped))
+        cardView.addGestureRecognizer(tap)
+    }
+    
+    @objc func cardTapped() {
+        let individualCafeVC = IndividualCafeVC()
+        individualCafeVC.cafe = cardView.cafe
+        individualCafeVC.configureUI()
+        navigationController?.pushViewController(individualCafeVC, animated: true)
     }
     func addCafes(location: CLLocation) {
         print("ran add cafes")
@@ -141,15 +152,20 @@ class ResultsVC: PCDataLoadingVC {
         refreshButton.translatesAutoresizingMaskIntoConstraints = false
         refreshButton.layer.cornerRadius = 3
         refreshButton.backgroundColor = .white
-        refreshButton.setTitle("Refresh", for: .normal)
+        refreshButton.setTitle("重新搜尋", for: .normal)
         refreshButton.setTitleColor(.black, for: .normal)
-        refreshButton.titleLabel?.font = .systemFont(ofSize: 20, weight: .black)
+        refreshButton.titleLabel?.font = .systemFont(ofSize: 17, weight: .medium)
+        refreshButton.layer.cornerRadius = 15
+        refreshButton.layer.shadowColor = UIColor.black.cgColor
+        refreshButton.layer.shadowOpacity = 0.25
+        refreshButton.layer.shadowOffset = CGSize(width: 5, height: 5)
+        refreshButton.layer.shadowRadius = 10
         view.addSubview(refreshButton)
         
         NSLayoutConstraint.activate([
             refreshButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             refreshButton.widthAnchor.constraint(equalToConstant: 150),
-            refreshButton.heightAnchor.constraint(equalToConstant: 40),
+            refreshButton.heightAnchor.constraint(equalToConstant: 30),
             refreshButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30)
         ])
         refreshButton.addTarget(self, action: #selector(refreshTapped), for: .touchUpInside)
@@ -185,6 +201,7 @@ extension ResultsVC: CLLocationManagerDelegate {
     @objc func listPressed() {
         let listResultsVC = ListResultsVC()
         listResultsVC.cafeList = totalCafeList
+        listResultsVC.configure()
         navigationController?.pushViewController(listResultsVC, animated: true)
     }
     

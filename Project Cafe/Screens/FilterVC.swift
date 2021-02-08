@@ -248,7 +248,7 @@ class FilterVC: UIViewController {
     
     @objc func findTapped() {
         if (searchBarView.searchBar.text == "") {
-            presentPCAlertOnMainThread(title: "Location Required", message: "Please insert a location", buttonTitle: "Ok")
+            presentPCAlertOnMainThread(title: "未輸入地址!", message: "請輸入您想搜尋的範圍. 我們想幫您找到最適合您的咖啡廳! ☕", buttonTitle: "知道了")
         } else {
             let resultsVC = ResultsVC()
             locationManager = CLLocationManager()

@@ -33,10 +33,11 @@ class CafeOnMap: NSObject, MKAnnotation {
     
 }
 struct Cafe: Codable {
-    let name: String?
+    let name: String
     let city: String?
     let address: String?
     let operatingHours: [OpeningHourPerDay]?
+    let openNow: Bool?
     let url: String?
     let distance: Double?
     let latitude: Double?

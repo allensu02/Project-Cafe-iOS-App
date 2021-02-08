@@ -29,11 +29,11 @@ class PCCafeListCell: UITableViewCell {
     
     func configureCardView() {
         cardView = PCCafeCardView(cafe: cafe)
-        addSubview(cardView)
+        contentView.addSubview(cardView)
         NSLayoutConstraint.activate([
-            cardView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            cardView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            cardView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            cardView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            cardView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            cardView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             cardView.heightAnchor.constraint(equalToConstant: Numbers.cardViewHeight)
         ])
         

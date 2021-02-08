@@ -31,6 +31,8 @@ enum Icons {
     static let mapPinIcon = UIImage(named: "mapPin")!
     static let mapPinLogoIcon = UIImage(systemName: "mappin.and.ellipse")!
     static let listIcon = UIImage(systemName: "list.bullet")!
+    static let walkIcon = UIImage(systemName: "figure.walk")!
+    static let globeIcon = UIImage(systemName: "globe")!
 }
 
 enum Colors {
