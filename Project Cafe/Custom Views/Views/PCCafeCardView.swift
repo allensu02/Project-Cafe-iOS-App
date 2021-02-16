@@ -65,21 +65,36 @@ class PCCafeCardView: UIView {
     }
     
     func setAttributes () {
-        
+        imageView.image = Images.cafePlaceholderImage
+        if (cafe.photos != nil) {
+            if (cafe.photos!.count != 0) {
+                let url = URL(string: cafe.photos![0])
+                if url != nil {
+                    downloadImage(from: url!)
+                }
+            }
+            
+        }
         nameLabel.text = cafe.name
-        openTimeLabel.text = "operating hours"
-        guard let distance = cafe.distance else { return }
-        distanceLabel.text = "Distance: \(distance)"
+        openTimeLabel.text = "營業時間"
+        changeTexts()
         configureContainerView()
         scrollView.contentSize = CGSize(width: currentOffset, height: 40)
         containerView.reloadInputViews()
-        guard let urlList = cafe.photos else { return }
-        if (urlList.count == 0) {
-            return
-        }
-        guard let url = URL(string: urlList[0]) else { return }
-        downloadImage(from: url)
-        
+       
+    }
+    
+    func changeTexts() {
+        guard let distance = cafe.distance else { return }
+        let boldText = "距離: "
+        let bold = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 20, weight: .black)]
+        let attributedString = NSMutableAttributedString(string: boldText, attributes: bold)
+        let normalText = "\(roundDistance(distance: distance)) 公尺"
+        let normal = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 20, weight: .medium)]
+        let normalString = NSMutableAttributedString(string:normalText, attributes: normal)
+
+        attributedString.append(normalString)
+        distanceLabel.attributedText = attributedString
     }
     
     func configureImageView() {
@@ -184,6 +199,7 @@ class PCCafeCardView: UIView {
     
     func configureFilters() {
         //check with garcia on meaning of this bool
+        activeFilters = []
         guard let cafe = cafe else {
             print("not valid cafe")
             return
@@ -199,7 +215,7 @@ class PCCafeCardView: UIView {
 //            activeFilters.append(.noLimit)
 //        }
         if (cafe.pourOver != nil && cafe.pourOver!) {
-            activeFilters.append(PCFilterButton(iconImage: Icons.coffeeIcon, filter: .goodCoffee))
+            activeFilters.append(PCFilterButton(iconImage: Icons.cupFilled, filter: .goodCoffee))
         }
         if (cafe.nearMrt != nil && cafe.nearMrt!) {
             activeFilters.append(PCFilterButton(iconImage: Icons.mrtIcon, filter: .mrt))
@@ -218,7 +234,7 @@ class PCCafeCardView: UIView {
 //            activeFilters.append(.noLimit)
 //        }
         if (cafe.desserts != nil && cafe.desserts!) {
-            activeFilters.append(PCFilterButton(iconImage: Icons.dessertIcon, filter: .desserts))
+            activeFilters.append(PCFilterButton(iconImage: Icons.dessertFilled, filter: .desserts))
         }
         if (cafe.meals   != nil && cafe.timeLimit!) {
             activeFilters.append(PCFilterButton(iconImage: Icons.foodIcon, filter: .meals))

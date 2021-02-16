@@ -18,6 +18,8 @@ class HomeVC: UIViewController {
     var stackView: UIStackView!
     var locationManager: CLLocationManager!
     
+    private let completer = MKLocalSearchCompleter()
+
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
     }
@@ -122,7 +124,9 @@ extension HomeVC: UISearchBarDelegate {
             return
         }
         isEditing = false
-        NetworkManager.shared.getCafes(keyword: searchBar.text!, limit: 15) { (data) in
+        locationManager = CLLocationManager()
+
+        NetworkManager.shared.getCafes(keyword: searchBar.text!, limit: 15, lat: locationManager.location!.coordinate.latitude, lon: locationManager.location!.coordinate.longitude) { (data) in
             let cafeResults = data.results
             DispatchQueue.main.async {
                 let listResultsVC = ListResultsVC()
@@ -131,8 +135,7 @@ extension HomeVC: UISearchBarDelegate {
                 self.navigationController?.pushViewController(listResultsVC, animated: true)
                 searchBar.text = ""
             }
-            
         }
-        print("yuh")
     }
 }
+

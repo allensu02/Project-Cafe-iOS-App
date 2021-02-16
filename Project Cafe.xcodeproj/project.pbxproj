@@ -31,6 +31,7 @@
 		A35CC26F25935B2700542907 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35CC26E25935B2700542907 /* APIKeys.swift */; };
 		A35CC2732593647300542907 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35CC2722593647300542907 /* NetworkManager.swift */; };
 		A3650ACE25BF255F006C53CB /* PCCafeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3650ACD25BF255F006C53CB /* PCCafeCardView.swift */; };
+		A36AA25925DAB894007D4A6F /* PCOpenHoursView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36AA25825DAB894007D4A6F /* PCOpenHoursView.swift */; };
 		A37CCD3C25C2D72E00E2BBB0 /* PCDataLoadingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37CCD3B25C2D72E00E2BBB0 /* PCDataLoadingVC.swift */; };
 		A390847925A5C04800CEAFFC /* PCCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A390847825A5C04800CEAFFC /* PCCategoryCell.swift */; };
 		A390847C25A5E6C800CEAFFC /* NewCategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A390847B25A5E6C800CEAFFC /* NewCategoryVC.swift */; };
@@ -87,6 +88,7 @@
 		A3614FE82590B23200A34A43 /* Merriweather-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Bold.ttf"; sourceTree = "<group>"; };
 		A3614FE92590B23200A34A43 /* Merriweather-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Light.ttf"; sourceTree = "<group>"; };
 		A3650ACD25BF255F006C53CB /* PCCafeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCCafeCardView.swift; sourceTree = "<group>"; };
+		A36AA25825DAB894007D4A6F /* PCOpenHoursView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCOpenHoursView.swift; sourceTree = "<group>"; };
 		A37CCD3B25C2D72E00E2BBB0 /* PCDataLoadingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCDataLoadingVC.swift; sourceTree = "<group>"; };
 		A390847825A5C04800CEAFFC /* PCCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCCategoryCell.swift; sourceTree = "<group>"; };
 		A390847B25A5E6C800CEAFFC /* NewCategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCategoryVC.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				A3650ACD25BF255F006C53CB /* PCCafeCardView.swift */,
 				A335568825CD42FE002EDF7A /* PCIndividualTopView.swift */,
 				A335568B25CD6D80002EDF7A /* PCIndividualMainView.swift */,
+				A36AA25825DAB894007D4A6F /* PCOpenHoursView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				A35CC26F25935B2700542907 /* APIKeys.swift in Sources */,
 				A3EF6B8D259A0FBF00415952 /* PCHomeScreenButton.swift in Sources */,
 				A31E4DBA25936AB70013BF02 /* Cafe.swift in Sources */,
+				A36AA25925DAB894007D4A6F /* PCOpenHoursView.swift in Sources */,
 				A3D56C532590A24E00E939B0 /* SceneDelegate.swift in Sources */,
 				A34662EF25A596C000F68CAA /* EditCategoryVC.swift in Sources */,
 				A37CCD3C25C2D72E00E2BBB0 /* PCDataLoadingVC.swift in Sources */,

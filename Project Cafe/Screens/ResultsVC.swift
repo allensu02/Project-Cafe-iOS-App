@@ -21,7 +21,9 @@ class ResultsVC: PCDataLoadingVC {
     var cardView: PCCafeCardView!
     var listButton: UIBarButtonItem!
     var totalCafeList: [Cafe] = []
-
+    var activatedFilters: [PCFilterButton] = []
+    var queryString: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.delegate = self
@@ -30,6 +32,7 @@ class ResultsVC: PCDataLoadingVC {
         locationManager.requestLocation()
         configureUI()
         addCafes(location: initialLocation)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,26 +77,38 @@ class ResultsVC: PCDataLoadingVC {
         individualCafeVC.configureUI()
         navigationController?.pushViewController(individualCafeVC, animated: true)
     }
+    
     func addCafes(location: CLLocation) {
         print("ran add cafes")
         showLoadingView()
-        NetworkManager.shared.getCafes(lat: location.coordinate.latitude, lon: location.coordinate.longitude, limit: 15) { (data) in
-            print("running in closure")
-            let cafeList = data.results
-            var cafeAnnotations: [CafeOnMap] = []
-            for cafe in cafeList {
-                let thisCafe = CafeOnMap(cafe: cafe)
-                cafeAnnotations.append(thisCafe)
-            }
-            self.totalCafeList.insert(contentsOf: cafeList, at: 0)
-            DispatchQueue.main.async {
-                self.mapView.addAnnotations(cafeAnnotations)
-                self.cardView.set(cafe: cafeAnnotations[0].cafe)
-                self.refreshButton.isHidden = true
-                print("updated annotations")
-            }
-            self.dismissLoadingView()
+        NetworkManager.shared.getCafes(lat: location.coordinate.latitude, lon: location.coordinate.longitude, limit: 15, queryString: queryString) { (data) in
+            self.updateCafes(data: data)
         }
+
+    }
+    
+    func updateCafes(data: CafeResults) {
+        print("running in closure")
+        let cafeList = data.results
+        var cafeAnnotations: [CafeOnMap] = []
+        for cafe in cafeList {
+            let thisCafe = CafeOnMap(cafe: cafe)
+            cafeAnnotations.append(thisCafe)
+        }
+        self.totalCafeList.insert(contentsOf: cafeList, at: 0)
+        DispatchQueue.main.async {
+            
+            self.mapView.addAnnotations(cafeAnnotations)
+            if (cafeAnnotations.count > 0) {
+                self.cardView.set(cafe: cafeAnnotations[0].cafe)
+                self.mapView.selectAnnotation(cafeAnnotations[0], animated: true)
+            } else {
+                self.presentPCAlertOnMainThread(title: "無咖啡廳", message: "您搜尋的範圍沒有任何咖啡廳。請移動您的地圖，並按下[重新搜尋]來尋找新的咖啡廳 ☕", buttonTitle: "知道了")
+            }
+            self.refreshButton.isHidden = true
+            print("updated annotations")
+        }
+        self.dismissLoadingView()
     }
     
     //handles errors and begins updating location

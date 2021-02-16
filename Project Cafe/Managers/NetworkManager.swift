@@ -31,8 +31,28 @@ class NetworkManager {
         }.resume()
     }
     
-    func getCafes(keyword: String, limit: Int, completed: @escaping (CafeResults) -> Void) {
-        var endpoint = baseURL + "name_search/?limit=\(limit)&keyword=\(keyword)"
+    func getCafes(lat: Double, lon: Double, limit: Int, queryString: String, completed: @escaping (CafeResults) -> Void) {
+        let endpoint = baseURL + "search/?latitude=\(lat)&longitude=\(lon)&limit=\(limit)" + queryString
+        guard let url = URL(string: endpoint) else {
+            print("error with url")
+            return
+        }
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let data = data {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                guard let cafeObj = try? decoder.decode(CafeResults.self, from: data) else {
+                    print("error hereee")
+                    return
+                }
+                completed(cafeObj)
+            }
+        }.resume()
+    }
+    
+    
+    func getCafes(keyword: String, limit: Int, lat: Double, lon: Double, completed: @escaping (CafeResults) -> Void) {
+        var endpoint = baseURL + "name_search/?limit=\(limit)&keyword=\(keyword)&latitude=\(lat)&longitude=\(lon)"
         endpoint = endpoint.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         guard let url = URL(string: endpoint) else {
             print("error with url: \(endpoint)")
@@ -51,6 +71,7 @@ class NetworkManager {
         }.resume()
     }
     
+    //broken right now for some reason
     func getCafes(lat: Double, lon: Double, radius: Int, completed: @escaping (CafeResults) -> Void) {
         let endpoint = baseURL + "search/?latitude=\(lat)&longitude=\(lon)&radius_in_meters=\(radius)"
         print(endpoint)
@@ -70,5 +91,25 @@ class NetworkManager {
             }
         }.resume()
     }
+    
+    func getCafes(lat: Double, lon: Double, limit: Int, activeFilters: [PCFilterButton], completed: @escaping(CafeResults) -> Void) {
+        let endpoint = baseURL + "search/?latitude=\(lat)&longitude=\(lon)&limit=\(limit)"
+        guard let url = URL(string: endpoint) else {
+            print("error with url")
+            return
+        }
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let data = data {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                guard let cafeObj = try? decoder.decode(CafeResults.self, from: data) else {
+                    print("error hereee")
+                    return
+                }
+                completed(cafeObj)
+            }
+        }.resume()
+    }
+
     
 }

@@ -19,5 +19,32 @@ class PCFilterButton: PCIconButton {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func addColor() {
+        super.addColor()
+        
+        switch filter {
+        case .desserts:
+            self.iconView.image = Icons.dessertOutlined
+            break
+        case .goodCoffee:
+            self.iconView.image = Icons.cupOutlined
+        default:
+            return
+        }
+    }
+    
+    override func removeColor() {
+        super.removeColor()
+        switch filter {
+        case .desserts:
+            self.iconView.image = Icons.dessertFilled
+            break
+        case .goodCoffee:
+            self.iconView.image = Icons.cupFilled
+        default:
+            return
+        }
+    }
+    
     
 }

@@ -73,12 +73,19 @@ class MapVC: UIViewController {
     }
     
     @objc func confirmTapped () {
+        print(label.text)
+        if (label.text == nil || label.text == "" || label.text == " ") {
+            print("error w label")
+            presentPCAlertOnMainThread(title: "無地址顯示", message: "您搜尋的地點沒有顯示出地址。請移動地圖至有地址的位置 🗺", buttonTitle: "知道了")
+            return
+        }
         guard let prevVC =  navigationController?.viewControllers[(navigationController?.viewControllers.count)!-2] as? FilterVC else {
             print("problem with confirmed tap")
             return
         }
         print("ran confirmedtap")
         prevVC.locationToSearch = getCenterLocation(for: mapView)
+        
         prevVC.searchBarView.searchBar.searchTextField.text = label.text
         navigationController?.popViewController(animated: true)
         print("ran dismissed")

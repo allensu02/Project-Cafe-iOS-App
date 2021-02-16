@@ -23,6 +23,7 @@ class FilterVC: UIViewController {
     var locationToSearch: CLLocation!
     var resultsTableView: UITableView!
     var locationResults: [MKLocalSearchCompletion] = []
+    var queryString: String = ""
     
     private let completer = MKLocalSearchCompleter()
     
@@ -78,6 +79,7 @@ class FilterVC: UIViewController {
     
     func configureSearchBar() {
         searchBarView = PCLabelSearchView()
+        searchBarView.searchBar.isUserInteractionEnabled = false
         contentView.addSubview(searchBarView)
         searchBarView.mapButton.addTarget(self, action: #selector(mapButtonTapped), for: .touchUpInside)
         searchBarView.searchBar.searchTextField.delegate = self
@@ -107,6 +109,8 @@ class FilterVC: UIViewController {
             button.addTarget(self, action: #selector(categorySelected) , for: .touchUpInside)
         }
         categorySectionView.editButton.addTarget(self, action: #selector(categoryEdit), for: .touchUpInside)
+        //hide button
+        categorySectionView.editButton.isHidden = true
         categorySectionView.moreButton.addTarget(self, action: #selector(categoryMore), for: .touchUpInside)
         categorySectionView.moreButton.isHidden = true
     }
@@ -147,12 +151,12 @@ class FilterVC: UIViewController {
             filterSectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             filterHeightAnchor
         ])
-        
+        filterSectionView.filterButtons[10].addTarget(self, action: #selector(openTimeSelected), for: .touchUpInside)
+        filterSectionView.filterButtons[6].addTarget(self, action: #selector(priceSelected), for: .touchUpInside)
         for button in filterSectionView.filterButtons {
             button.addTarget(self, action: #selector(FilterSelected), for: .touchUpInside)
         }
-        filterSectionView.filterButtons[10].addTarget(self, action: #selector(openTimeSelected), for: .touchUpInside)
-        filterSectionView.filterButtons[6].addTarget(self, action: #selector(priceSelected), for: .touchUpInside)
+        
         filterSectionView.editButton.isHidden = true
         filterSectionView.moreButton.bringSubviewToFront(view)
         filterSectionView.moreButton.addTarget(self, action: #selector(filterMore), for: .touchUpInside)
@@ -176,15 +180,24 @@ class FilterVC: UIViewController {
         ])
     }
     
-    @objc func openTimeSelected () {
-        presentPopUp(vc: PCOpeningHoursVC())
+    @objc func openTimeSelected (sender: PCFilterButton!) {
+        if (!sender.isTapped) {
+            presentPopUp(vc: PCOpeningHoursVC())
+        } else {
+            return
+        }
     }
     
-    @objc func priceSelected() {
-        presentPopUp(vc: PCPriceVC())
+    @objc func priceSelected(sender: PCFilterButton!) {
+        if (!sender.isTapped) {
+            presentPopUp(vc: PCPriceVC())
+        } else {
+            return
+        }
+        
     }
     
-    @objc func FilterSelected(sender: PCIconButton!) {
+    @objc func FilterSelected(sender: PCFilterButton!) {
         
         if (sender.isTapped) {
             sender.removeColor()
@@ -241,7 +254,7 @@ class FilterVC: UIViewController {
             findButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             findButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             findButton.heightAnchor.constraint(equalToConstant: 40),
-            findButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            findButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
         ])
         findButton.addTarget(self, action: #selector(findTapped), for: .touchUpInside)
     }
@@ -253,8 +266,35 @@ class FilterVC: UIViewController {
             let resultsVC = ResultsVC()
             locationManager = CLLocationManager()
             resultsVC.initialLocation = locationToSearch
+            configureQueryString()
+            resultsVC.queryString = queryString
             navigationController?.pushViewController(resultsVC, animated: true)
         }
+    }
+    
+    func configureQueryString() {
+        for filterButton in filterSectionView.filterButtons {
+            if filterButton.isTapped {
+                switch filterButton.filter {
+                case .noLimit: queryString = queryString + "&time_limit=false"
+                case .outlets: queryString = queryString + "&plugs=true"
+                case .openNow: queryString = queryString + "&open_now=true"
+                case .goodCoffee: queryString = queryString + "&pour_over=true"
+                case .mrt: queryString = queryString + "&near_mrt=true"
+                case .wifi: queryString = queryString + "&wifi=true"
+                case .noLimit: queryString = queryString + "&wifi=true"
+                case .seats: queryString = queryString + "&seats_min=3"
+                case .quiet: queryString = queryString + "&quietness_min=3"
+                case .price: queryString = queryString + "&price_level_max=1"
+                //need to update open time filter
+                case .price: queryString = queryString + "&price_level_max=1"
+                case .desserts: queryString = queryString + "&desserts=true"
+                case .meals: queryString = queryString + "&meals=true"
+                default: break
+                }
+            }
+        }
+        print(queryString)
     }
     
     @objc func dismissKeyboard() {
@@ -271,8 +311,6 @@ extension FilterVC: UISearchTextFieldDelegate{
             }
             return
         }
-        print("ran queryfrag")
-        resultsTableView.isHidden = false
         completer.queryFragment = query
         DispatchQueue.main.async {
             self.resultsTableView.reloadData()
@@ -283,7 +321,6 @@ extension FilterVC: UISearchTextFieldDelegate{
 
 extension FilterVC: MKLocalSearchCompleterDelegate {
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-        print("ran update reult")
         for result in completer.results {
             print(result.description)
             locationResults.append(result)

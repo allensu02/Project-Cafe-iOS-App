@@ -23,7 +23,7 @@ class PCCafeListCell: UITableViewCell {
     func configure(cafe: Cafe) {
         self.cafe = cafe
         configureCardView()
-        cardView.setAttributes()
+        cardView.set(cafe: cafe)
         backgroundColor = .systemGray4
     }
     

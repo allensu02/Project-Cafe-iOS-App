@@ -75,7 +75,7 @@ class PCCategoryCell: UITableViewCell {
         iconView.tintColor = Colors.navyBlue
         switch category {
         case .drinkCoffee:
-            iconView.image = Icons.coffeeIcon
+            iconView.image = Icons.cupFilled
             return
         case .work:
             iconView.image = Icons.computerIcon

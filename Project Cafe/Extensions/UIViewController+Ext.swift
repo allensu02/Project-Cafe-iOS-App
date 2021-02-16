@@ -49,5 +49,7 @@ extension UIViewController {
         return CLLocation(latitude: latitude, longitude: longitude)
     }
     
-    
+    func roundDistance(distance: Double) -> Int {
+        return 10 * Int((distance / 10.0).rounded())
+    }
 }

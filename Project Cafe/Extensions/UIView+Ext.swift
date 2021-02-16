@@ -12,4 +12,8 @@ extension UIView {
     func addSubviews(_ views: UIView...) {
         for view in views { addSubview(view) }
     }
+    
+    func roundDistance(distance: Double) -> Int {
+        return 10 * Int((distance / 10.0).rounded())
+    }
 }

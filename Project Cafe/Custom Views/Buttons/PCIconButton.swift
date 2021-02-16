@@ -40,7 +40,7 @@ class PCIconButton: UIButton {
         configureIconView()
         configureLabel()
         isTapped = false
-        layer.borderColor = Colors.navyBlue.cgColor
+        layer.borderColor = UIColor.systemGray4.cgColor
         layer.borderWidth = 1
         layer.cornerRadius = 10
         setTitleColor(.red, for: .highlighted)

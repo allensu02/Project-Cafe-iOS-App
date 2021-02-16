@@ -22,7 +22,9 @@ class PCIndividualMainView: UIView {
     var globeLabel: PCTitleLabel!
     var mrtView: UIImageView!
     var mrtLabel: PCTitleLabel!
+    var openHourStack: UIStackView!
     
+
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -67,7 +69,16 @@ class PCIndividualMainView: UIView {
         distanceView.tintColor = .black
         distanceLabel = PCTitleLabel(textAlignment: .left, fontSize: 15)
         guard let distance = cafe.distance else { return }
-        distanceLabel.text = "\(distance) 公尺"
+        
+        let boldText = "距離: "
+        let attrs = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 15)]
+        let attributedString = NSMutableAttributedString(string:boldText, attributes: attrs)
+        
+        let normalText = "\(roundDistance(distance: distance)) 公尺"
+        let normalString = NSMutableAttributedString(string:normalText)
+
+        attributedString.append(normalString)
+        distanceLabel.attributedText = attributedString
         
         addSubviews(distanceView, distanceLabel)
         
@@ -90,20 +101,74 @@ class PCIndividualMainView: UIView {
         openView.tintColor = .black
         openLabel = PCTitleLabel(textAlignment: .left, fontSize: 15)
         openLabel.text = "fuck this one"
-        
-        addSubviews(openView, openLabel)
-        
+            
+        openHourStack = UIStackView()
+        openHourStack.translatesAutoresizingMaskIntoConstraints = false
+        print(cafe.operatingHours)
+        if cafe.operatingHours != nil && cafe.operatingHours?.count == 7 {
+            openHourStack.addArrangedSubview(createDayStack(dayOfWeek: "週一", opening: hoursToString(hours: cafe.operatingHours![0])))
+            openHourStack.addArrangedSubview(createDayStack(dayOfWeek: "週二", opening: hoursToString(hours: cafe.operatingHours![1])))
+            openHourStack.addArrangedSubview(createDayStack(dayOfWeek: "週三", opening: hoursToString(hours: cafe.operatingHours![2])))
+            openHourStack.addArrangedSubview(createDayStack(dayOfWeek: "週四", opening: hoursToString(hours: cafe.operatingHours![3])))
+            openHourStack.addArrangedSubview(createDayStack(dayOfWeek: "週五", opening: hoursToString(hours: cafe.operatingHours![4])))
+            openHourStack.addArrangedSubview(createDayStack(dayOfWeek: "週六", opening: hoursToString(hours: cafe.operatingHours![5])))
+            openHourStack.addArrangedSubview(createDayStack(dayOfWeek: "週日", opening: hoursToString(hours: cafe.operatingHours![6])))
+            openHourStack.axis = .vertical
+            openHourStack.distribution = .fillProportionally
+            openHourStack.alignment = .fill
+            openHourStack.spacing = 2
+        }
+    
+        addSubviews(openView, openHourStack)
         NSLayoutConstraint.activate([
             openView.topAnchor.constraint(equalTo: distanceView.bottomAnchor, constant: 10),
             openView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             openView.widthAnchor.constraint(equalToConstant: 20),
             openView.heightAnchor.constraint(equalToConstant: 20),
             
-            openLabel.leadingAnchor.constraint(equalTo: openView.trailingAnchor, constant: 10),
-            openLabel.topAnchor.constraint(equalTo: openView.topAnchor),
-            openLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            openLabel.heightAnchor.constraint(equalToConstant: 20)
+            openHourStack.leadingAnchor.constraint(equalTo: openView.trailingAnchor, constant: 10),
+            openHourStack.topAnchor.constraint(equalTo: openView.topAnchor),
+            openHourStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            openHourStack.heightAnchor.constraint(equalToConstant: 160)
         ])
+        
+    }
+    
+    func hoursToString(hours: OpeningHourPerDay) -> String {
+        var startTime: String
+        var endTime: String
+        if hours.startTime == nil {
+            startTime = ""
+        } else {
+            startTime = hours.startTime!
+        }
+        if hours.endTime == nil {
+            endTime = ""
+        } else {
+            endTime = hours.endTime!
+        }
+        if (endTime == "" || startTime == "") {
+            return ""
+        }
+        return "\(startTime) - \(endTime)"
+    }
+    
+    func createDayStack(dayOfWeek: String, opening: String) -> UIStackView {
+        let stackView = UIStackView()
+        let dayLabel = PCTitleLabel(textAlignment: .left, fontSize: 15)
+        dayLabel.text = dayOfWeek
+        dayLabel.translatesAutoresizingMaskIntoConstraints = false
+        let openingLabel = PCTitleLabel(textAlignment: .right, fontSize: 15)
+        openingLabel.text = opening
+        openingLabel.translatesAutoresizingMaskIntoConstraints = false
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.distribution = .fill
+        stackView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        stackView.addArrangedSubview(dayLabel)
+        stackView.addArrangedSubview(openingLabel)
+
+        return stackView
     }
     
     func configureLocation() {
@@ -118,7 +183,7 @@ class PCIndividualMainView: UIView {
         addSubviews(pinView, pinLabel)
         
         NSLayoutConstraint.activate([
-            pinView.topAnchor.constraint(equalTo: openLabel.bottomAnchor, constant: 10),
+            pinView.topAnchor.constraint(equalTo: openHourStack.bottomAnchor, constant: 10),
             pinView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             pinView.widthAnchor.constraint(equalToConstant: 20),
             pinView.heightAnchor.constraint(equalToConstant: 20),

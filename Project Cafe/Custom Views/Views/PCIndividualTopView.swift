@@ -55,6 +55,26 @@ class PCIndividualTopView: UIView {
             imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             imageView.heightAnchor.constraint(equalToConstant: 170)
         ])
+        
+        guard let urlList = cafe.photos else { return }
+        if (urlList.count == 0) {
+            return
+        }
+        guard let url = URL(string: urlList[0]) else { return }
+        downloadImage(from: url)
+    }
+    
+    func downloadImage(from url: URL) {
+        getData(from: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            DispatchQueue.main.async() { [weak self] in
+                self!.imageView.image = UIImage(data: data)
+            }
+        }
+    }
+    
+    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
     
     func configureNameLabel() {
@@ -139,7 +159,7 @@ class PCIndividualTopView: UIView {
 //            activeFilters.append(.noLimit)
 //        }
         if (cafe.pourOver != nil && cafe.pourOver!) {
-            activeFilters.append(PCFilterButton(iconImage: Icons.coffeeIcon, filter: .goodCoffee))
+            activeFilters.append(PCFilterButton(iconImage: Icons.cupFilled, filter: .goodCoffee))
         }
         if (cafe.nearMrt != nil && cafe.nearMrt!) {
             activeFilters.append(PCFilterButton(iconImage: Icons.mrtIcon, filter: .mrt))
@@ -158,7 +178,7 @@ class PCIndividualTopView: UIView {
 //            activeFilters.append(.noLimit)
 //        }
         if (cafe.desserts != nil && cafe.desserts!) {
-            activeFilters.append(PCFilterButton(iconImage: Icons.dessertIcon, filter: .desserts))
+            activeFilters.append(PCFilterButton(iconImage: Icons.dessertFilled, filter: .desserts))
         }
         if (cafe.meals   != nil && cafe.timeLimit!) {
             activeFilters.append(PCFilterButton(iconImage: Icons.foodIcon, filter: .meals))
