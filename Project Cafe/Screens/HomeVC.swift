@@ -8,7 +8,7 @@
 import UIKit
 import MapKit
 
-class HomeVC: UIViewController {
+class HomeVC: PCDataLoadingVC {
 
     var topView: PCHomeTopView!
     var buttonOne: PCHomeScreenButton!
@@ -39,6 +39,7 @@ class HomeVC: UIViewController {
     
     func configureTopView() {
         topView = PCHomeTopView()
+        
         topView.searchBar.delegate = self
         view.addSubview(topView)
         NSLayoutConstraint.activate([
@@ -112,7 +113,9 @@ class HomeVC: UIViewController {
             pcCardView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20)
         ])
     }
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        dismissLoadingView()
+    }
 }
 
 
@@ -125,7 +128,8 @@ extension HomeVC: UISearchBarDelegate {
         }
         isEditing = false
         locationManager = CLLocationManager()
-
+        dismissKeyboard()
+        showLoadingView()
         NetworkManager.shared.getCafes(keyword: searchBar.text!, limit: 15, lat: locationManager.location!.coordinate.latitude, lon: locationManager.location!.coordinate.longitude) { (data) in
             let cafeResults = data.results
             DispatchQueue.main.async {

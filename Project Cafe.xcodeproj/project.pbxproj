@@ -27,6 +27,7 @@
 		A340245525B07F2500037D4A /* PCDatePickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A340245425B07F2500037D4A /* PCDatePickerTextField.swift */; };
 		A34662EF25A596C000F68CAA /* EditCategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34662EE25A596C000F68CAA /* EditCategoryVC.swift */; };
 		A347952025B5B92B009B8719 /* PCPriceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A347951F25B5B92B009B8719 /* PCPriceVC.swift */; };
+		A353ECDD25FFABFC00D7786C /* PCAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A353ECDC25FFABFB00D7786C /* PCAnnotationView.swift */; };
 		A356737E25AF47E800CEAB50 /* PCOpeningHoursVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A356737D25AF47E800CEAB50 /* PCOpeningHoursVC.swift */; };
 		A35CC26F25935B2700542907 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35CC26E25935B2700542907 /* APIKeys.swift */; };
 		A35CC2732593647300542907 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35CC2722593647300542907 /* NetworkManager.swift */; };
@@ -79,6 +80,7 @@
 		A340245425B07F2500037D4A /* PCDatePickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCDatePickerTextField.swift; sourceTree = "<group>"; };
 		A34662EE25A596C000F68CAA /* EditCategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryVC.swift; sourceTree = "<group>"; };
 		A347951F25B5B92B009B8719 /* PCPriceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCPriceVC.swift; sourceTree = "<group>"; };
+		A353ECDC25FFABFB00D7786C /* PCAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCAnnotationView.swift; sourceTree = "<group>"; };
 		A356737D25AF47E800CEAB50 /* PCOpeningHoursVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCOpeningHoursVC.swift; sourceTree = "<group>"; };
 		A35CC26E25935B2700542907 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		A35CC2722593647300542907 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				A335568825CD42FE002EDF7A /* PCIndividualTopView.swift */,
 				A335568B25CD6D80002EDF7A /* PCIndividualMainView.swift */,
 				A36AA25825DAB894007D4A6F /* PCOpenHoursView.swift */,
+				A353ECDC25FFABFB00D7786C /* PCAnnotationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -413,6 +416,7 @@
 				A31EAD81259224EC00A72021 /* PCSecondaryLabel.swift in Sources */,
 				A32D8E4825C5B9D50027137F /* ListResultsVC.swift in Sources */,
 				A335568925CD42FE002EDF7A /* PCIndividualTopView.swift in Sources */,
+				A353ECDD25FFABFC00D7786C /* PCAnnotationView.swift in Sources */,
 				A3650ACE25BF255F006C53CB /* PCCafeCardView.swift in Sources */,
 				A390848825A5EEEC00CEAFFC /* PCFilterListView.swift in Sources */,
 				A35CC26F25935B2700542907 /* APIKeys.swift in Sources */,

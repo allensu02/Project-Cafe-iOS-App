@@ -187,18 +187,18 @@ class PCSectionView: UIView {
         ])
     }
     func setFilterButtons() {
-        let noLimit = PCFilterButton(iconImage: Icons.clockIcon, filter: .noLimit)
-        let openNow = PCFilterButton(iconImage: Icons.storeIcon, filter: .openNow)
-        let outlets = PCFilterButton(iconImage: Icons.outletIcon, filter: .outlets)
-        let goodCoffee = PCFilterButton(iconImage: Icons.cupFilled, filter: .goodCoffee)
-        let mrt = PCFilterButton(iconImage: Icons.mrtIcon, filter: .mrt)
-        let seats = PCFilterButton(iconImage: Icons.seatsIcon, filter: .seats)
-        let price = PCFilterButton(iconImage: Icons.priceIcon, filter: .price)
-        let desserts = PCFilterButton(iconImage: Icons.dessertFilled, filter: .desserts)
-        let wifi = PCFilterButton(iconImage: Icons.wifiIcon, filter: .wifi)
-        let quiet = PCFilterButton(iconImage: Icons.quietIcon, filter: .quiet)
-        let openTime = PCFilterButton(iconImage: Icons.calendarIcon, filter: .openTime)
-        let meals = PCFilterButton(iconImage: Icons.foodIcon, filter: .meals)
+        let noLimit = PCFilterButton(iconImage: Icons.clockOutline, filter: .noLimit)
+        let openNow = PCFilterButton(iconImage: Icons.storeOutline, filter: .openNow)
+        let outlets = PCFilterButton(iconImage: Icons.plugOutline, filter: .outlets)
+        let goodCoffee = PCFilterButton(iconImage: Icons.cupOutline, filter: .goodCoffee)
+        let mrt = PCFilterButton(iconImage: Icons.mrtOutline, filter: .mrt)
+        let seats = PCFilterButton(iconImage: Icons.chairOutline, filter: .seats)
+        let price = PCFilterButton(iconImage: Icons.moneyOutline, filter: .price)
+        let desserts = PCFilterButton(iconImage: Icons.cakeOutline, filter: .desserts)
+        let wifi = PCFilterButton(iconImage: Icons.wifiOutline, filter: .wifi)
+        let quiet = PCFilterButton(iconImage: Icons.soundOutline, filter: .quiet)
+        let openTime = PCFilterButton(iconImage: Icons.calendarOutline, filter: .openTime)
+        let meals = PCFilterButton(iconImage: Icons.mealOutline, filter: .meals)
         filterButtons = [noLimit, openNow, outlets, goodCoffee, mrt, seats, price, desserts, wifi, quiet, openTime, meals]
     }
     
@@ -206,7 +206,7 @@ class PCSectionView: UIView {
         let work = PCCategoryButton(iconImage: Icons.computerIcon, category: .work)
         let groupMeal = PCCategoryButton(iconImage: Icons.groupIcon, category: .groupMeal)
         let relax = PCCategoryButton(iconImage: Icons.relaxIcon, category: .relax)
-        let coffee = PCCategoryButton(iconImage: Icons.cupFilled, category: .drinkCoffee)
+        let coffee = PCCategoryButton(iconImage: Icons.cupOutline, category: .drinkCoffee)
         
         categoryButtons = [work, groupMeal, relax, coffee]
     }

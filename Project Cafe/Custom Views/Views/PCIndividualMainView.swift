@@ -19,7 +19,7 @@ class PCIndividualMainView: UIView {
     var pinView: UIImageView!
     var pinLabel: PCTitleLabel!
     var globeView: UIImageView!
-    var globeLabel: PCTitleLabel!
+    var globeButton: UIButton!
     var mrtView: UIImageView!
     var mrtLabel: PCTitleLabel!
     var openHourStack: UIStackView!
@@ -96,7 +96,7 @@ class PCIndividualMainView: UIView {
     }
     
     func configureOpenNow() {
-        openView = UIImageView(image: Icons.clockIcon)
+        openView = UIImageView(image: Icons.clockOutline)
         openView.translatesAutoresizingMaskIntoConstraints = false
         openView.tintColor = .black
         openLabel = PCTitleLabel(textAlignment: .left, fontSize: 15)
@@ -199,12 +199,14 @@ class PCIndividualMainView: UIView {
         globeView = UIImageView(image: Icons.globeIcon)
         globeView.tintColor = .black
         globeView.translatesAutoresizingMaskIntoConstraints = false
-        
-        globeLabel = PCTitleLabel(textAlignment: .left, fontSize: 15)
+        globeButton = UIButton()
+        globeButton.translatesAutoresizingMaskIntoConstraints = false
+        let globeLabel = PCTitleLabel(textAlignment: .left, fontSize: 15)
         guard let url = cafe.url else { return }
-        globeLabel.text = "\(url)"
-        
-        addSubviews(globeView, globeLabel)
+        globeButton.setTitle("\(url)", for: .normal)
+        globeButton.setTitleColor(.blue, for: .normal)
+        globeButton.addTarget(self, action: #selector(labelTapped), for: .touchUpInside)
+        addSubviews(globeView, globeButton)
         
         NSLayoutConstraint.activate([
             globeView.topAnchor.constraint(equalTo: pinLabel.bottomAnchor, constant: 10),
@@ -212,15 +214,23 @@ class PCIndividualMainView: UIView {
             globeView.widthAnchor.constraint(equalToConstant: 20),
             globeView.heightAnchor.constraint(equalToConstant: 20),
             
-            globeLabel.leadingAnchor.constraint(equalTo: globeView.trailingAnchor, constant: 10),
-            globeLabel.topAnchor.constraint(equalTo: globeView.topAnchor),
-            globeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            globeLabel.heightAnchor.constraint(equalToConstant: 20)
+            globeButton.leadingAnchor.constraint(equalTo: globeView.trailingAnchor, constant: 10),
+            globeButton.topAnchor.constraint(equalTo: globeView.topAnchor),
+            globeButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            globeButton.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
     
+    @objc func labelTapped() {
+        guard let targetURL = URL(string: cafe.url!) else {
+            return
+        }
+        let application = UIApplication.shared
+        application.openURL(targetURL);
+    }
+
     func configureMrt() {
-        mrtView = UIImageView(image: Icons.mrtIcon)
+        mrtView = UIImageView(image: Icons.mrtOutline)
         mrtView.tintColor = .black
         mrtView.translatesAutoresizingMaskIntoConstraints = false
         

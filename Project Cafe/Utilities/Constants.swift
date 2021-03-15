@@ -12,21 +12,9 @@ enum Icons {
     static let computerIcon = UIImage(systemName: "desktopcomputer")!
     static let relaxIcon = UIImage(systemName: "book")!
     static let groupIcon = UIImage(systemName: "person.2")!
-    static let cupOutlined = UIImage(named: "cupOutlined")!
-    static let cupFilled = UIImage(named: "cupFilled")!
-    static let outletIcon = UIImage(systemName: "battery.25")!
-    static let clockIcon = UIImage(systemName: "clock")!
-    static let storeIcon = UIImage(named: "storeIcon")!
-    static let wifiIcon = UIImage(systemName: "wifi")!
-    static let quietIcon = UIImage(systemName: "speaker.zzz")!
-    static let mrtIcon = UIImage(systemName: "tram.fill")!
-    static let priceIcon = UIImage(systemName: "dollarsign.circle")!
-    static let calendarIcon = UIImage(systemName: "calendar")!
+
     static let minusIcon = UIImage(systemName: "minus.circle")!
-    static let seatsIcon = UIImage(systemName: "person.crop.circle.badge.checkmark")!
-    static let foodIcon = UIImage(named: "food-outlined")!
-    static let dessertOutlined = UIImage(named: "cakeOutlined")!
-    static let dessertFilled = UIImage(named: "cakeFilled")!
+
     static let horizontalLines = UIImage(systemName: "line.horizontal.3")!
     static let homeOneIcon = UIImage(named: "HomeIconOne")!
     static let homeTwoIcon = UIImage(named: "HomeIconTwo")!
@@ -35,6 +23,32 @@ enum Icons {
     static let listIcon = UIImage(systemName: "list.bullet")!
     static let walkIcon = UIImage(systemName: "figure.walk")!
     static let globeIcon = UIImage(systemName: "globe")!
+    
+    
+    static let clockFill = UIImage(named: "clockFill")!
+    static let clockOutline = UIImage(named: "clockOutline")!
+    static let mrtFill = UIImage(named: "mrtFill")!
+    static let mrtOutline = UIImage(named: "mrtOutline")!
+    static let storeFill = UIImage(named: "storeFill")!
+    static let storeOutline = UIImage(named: "storeOutline")!
+    static let plugFill = UIImage(named: "plugFill")!
+    static let plugOutline = UIImage(named: "plugOutline")!
+    static let cupFill = UIImage(named: "cupFill")!
+    static let cupOutline = UIImage(named: "cupOutline")!
+    static let wifiFill = UIImage(named: "wifiFill")!
+    static let wifiOutline = UIImage(named: "wifiOutline")!
+    static let chairFill = UIImage(named: "chairFill")!
+    static let chairOutline = UIImage(named: "chairOutline")!
+    static let soundFill = UIImage(named: "soundFill")!
+    static let soundOutline = UIImage(named: "soundOutline")!
+    static let moneyFill = UIImage(named: "moneyFill")!
+    static let moneyOutline = UIImage(named: "moneyOutline")!
+    static let calendarFill = UIImage(named: "calendarFill")!
+    static let calendarOutline = UIImage(named: "calendarOutline")!
+    static let cakeFill = UIImage(named: "cakeFill")!
+    static let cakeOutline = UIImage(named: "cakeOutline")!
+    static let mealFill = UIImage(named: "mealFill")!
+    static let mealOutline = UIImage(named: "mealOutline")!
 }
 
 enum Colors {

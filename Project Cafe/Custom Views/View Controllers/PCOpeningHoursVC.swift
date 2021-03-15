@@ -57,7 +57,7 @@ class PCOpeningHoursVC: UIViewController {
     }
     
     func configureIconView() {
-        iconView = UIImageView(image: Icons.calendarIcon)
+        iconView = UIImageView(image: Icons.calendarOutline)
         iconView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(iconView)
         
@@ -197,7 +197,7 @@ class PCOpeningHoursVC: UIViewController {
     }
     
     func configureSaveButton () {
-        saveButton = PCIconButton(iconImage: Icons.storeIcon, title: "儲存")
+        saveButton = PCIconButton(iconImage: Icons.storeOutline, title: "儲存")
         saveButton.layer.cornerRadius = 6
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
         view.addSubview(saveButton)

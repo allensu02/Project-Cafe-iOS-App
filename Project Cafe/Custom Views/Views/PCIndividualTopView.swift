@@ -149,39 +149,39 @@ class PCIndividualTopView: UIView {
             return
         }
         if (cafe.timeLimit != nil && cafe.timeLimit!) {
-            activeFilters.append(PCFilterButton(iconImage: Icons.clockIcon, filter: .noLimit))
+            activeFilters.append(PCFilterButton(iconImage: Icons.clockFill, filter: .noLimit))
         }
         if (cafe.plugs != nil && cafe.plugs!) {
-            activeFilters.append(PCFilterButton(iconImage: Icons.outletIcon, filter: .outlets))
+            activeFilters.append(PCFilterButton(iconImage: Icons.plugFill, filter: .outlets))
         }
         //need to figure out open now bool
 //        if (cafe. != nil && cafe.timeLimit!) {
 //            activeFilters.append(.noLimit)
 //        }
         if (cafe.pourOver != nil && cafe.pourOver!) {
-            activeFilters.append(PCFilterButton(iconImage: Icons.cupFilled, filter: .goodCoffee))
+            activeFilters.append(PCFilterButton(iconImage: Icons.cupFill, filter: .goodCoffee))
         }
         if (cafe.nearMrt != nil && cafe.nearMrt!) {
-            activeFilters.append(PCFilterButton(iconImage: Icons.mrtIcon, filter: .mrt))
+            activeFilters.append(PCFilterButton(iconImage: Icons.mrtFill, filter: .mrt))
         }
         if (cafe.wifi != nil && cafe.wifi!) {
-            activeFilters.append(PCFilterButton(iconImage: Icons.wifiIcon, filter: .wifi))
+            activeFilters.append(PCFilterButton(iconImage: Icons.wifiFill, filter: .wifi))
         }
         if (cafe.seats != nil && cafe.seats! > 2) {
-            activeFilters.append(PCFilterButton(iconImage: Icons.seatsIcon, filter: .seats))
+            activeFilters.append(PCFilterButton(iconImage: Icons.chairFill, filter: .seats))
         }
         if (cafe.quietness != nil && cafe.quietness! > 2) {
-            activeFilters.append(PCFilterButton(iconImage: Icons.quietIcon, filter: .quiet))
+            activeFilters.append(PCFilterButton(iconImage: Icons.soundFill, filter: .quiet))
         }
         //need to separately deal with price
 //        if (cafe.priceLevel != nil && cafe.timeLimit!) {
 //            activeFilters.append(.noLimit)
 //        }
         if (cafe.desserts != nil && cafe.desserts!) {
-            activeFilters.append(PCFilterButton(iconImage: Icons.dessertFilled, filter: .desserts))
+            activeFilters.append(PCFilterButton(iconImage: Icons.cakeFill, filter: .desserts))
         }
         if (cafe.meals   != nil && cafe.timeLimit!) {
-            activeFilters.append(PCFilterButton(iconImage: Icons.foodIcon, filter: .meals))
+            activeFilters.append(PCFilterButton(iconImage: Icons.mealFill, filter: .meals))
         }
     }
 }

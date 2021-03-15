@@ -84,7 +84,7 @@ class ResultsVC: PCDataLoadingVC {
         NetworkManager.shared.getCafes(lat: location.coordinate.latitude, lon: location.coordinate.longitude, limit: 15, queryString: queryString) { (data) in
             self.updateCafes(data: data)
         }
-
+        
     }
     
     func updateCafes(data: CafeResults) {
@@ -229,6 +229,13 @@ extension ResultsVC: MKMapViewDelegate {
         refreshButton.isHidden = false
     }
     
+    func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
+        let userView = mapView.view(for: mapView.userLocation)
+        userView?.isUserInteractionEnabled = false
+        userView?.isEnabled = false
+        userView?.canShowCallout = false
+    }
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if let cluster = annotation as? MKClusterAnnotation {
             var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "cluster") as? MKMarkerAnnotationView
@@ -243,11 +250,10 @@ extension ResultsVC: MKMapViewDelegate {
         }
         
         if let placeAnnotation = annotation as? CafeOnMap {
-            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "Cafe") as? MKMarkerAnnotationView
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "Cafe") as? PCAnnotationView
             if annotationView == nil {
-                annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "Cafe")
+                annotationView = PCAnnotationView(annotation: annotation, reuseIdentifier: "Cafe")
                 annotationView?.canShowCallout = true
-                annotationView?.clusteringIdentifier = "cluster"
             } else {
                 annotationView?.annotation = annotation
             }

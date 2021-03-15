@@ -36,6 +36,9 @@ class PCDataLoadingVC: UIViewController {
 
 
     func dismissLoadingView() {
+        if (containerView == nil) {
+            return
+        }
         DispatchQueue.main.async {
             self.containerView.removeFromSuperview()
             self.containerView = nil
