@@ -60,9 +60,13 @@ class IndividualCafeVC: UIViewController {
     }
     
     @objc func mapPressed() {
-        let resultsVC = ResultsVC()
-        resultsVC.initialLocation = CLLocation(latitude: cafe.latitude!, longitude: cafe.longitude!)
-        navigationController?.pushViewController(resultsVC, animated: true)
+//        let resultsVC = ResultsVC()
+//        resultsVC.initialLocation = CLLocation(latitude: cafe.latitude!, longitude: cafe.longitude!)
+//        navigationController?.pushViewController(resultsVC, animated: true)
+        guard let navArray = navigationController?.viewControllers else { return }
+        guard let prevVC = navArray[navArray.count - 2] as? ResultsVC else { return }
+        prevVC.initialLocation = CLLocation(latitude: cafe.latitude!, longitude: cafe.longitude!)
+        navigationController?.popViewController(animated: true)
     }
     
 }

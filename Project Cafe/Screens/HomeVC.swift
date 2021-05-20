@@ -35,6 +35,8 @@ class HomeVC: PCDataLoadingVC {
         view.addGestureRecognizer(tap)
         configureButton()
         //tempAddCard()
+        self.navigationController?.navigationBar.barTintColor = Colors.navyBlue
+        self.navigationController?.navigationBar.tintColor = .white
     }
     
     func configureTopView() {

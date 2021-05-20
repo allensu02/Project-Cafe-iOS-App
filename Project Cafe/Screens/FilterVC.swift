@@ -24,6 +24,7 @@ class FilterVC: UIViewController {
     var resultsTableView: UITableView!
     var locationResults: [MKLocalSearchCompletion] = []
     var queryString: String = ""
+    var resultSearchController: UISearchController? = nil
     
     private let completer = MKLocalSearchCompleter()
     
@@ -34,10 +35,15 @@ class FilterVC: UIViewController {
 
     }
     
-    func configureUI() {
-        view.backgroundColor = .systemBackground
+    override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.prefersLargeTitles = true
+            
+    }
+    
+    func configureUI() {
+        view.backgroundColor = .systemBackground
+        
         title = "偏好篩選"
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -47,9 +53,21 @@ class FilterVC: UIViewController {
         configureCategoryView()
         configureFilterView()
         configureFindButton()
-        //configureTableView()
+        //configureSearchController()
     }
     
+    func configureSearchController() {
+        let locationSearchTable = LocationResultsTVC()
+        resultSearchController = UISearchController(searchResultsController: locationSearchTable)
+        resultSearchController?.searchResultsUpdater = locationSearchTable
+        let searchBar = resultSearchController!.searchBar
+        searchBar.sizeToFit()
+        searchBar.placeholder = "Search for places"
+        navigationItem.titleView = resultSearchController?.searchBar
+        resultSearchController?.hidesNavigationBarDuringPresentation = false
+        resultSearchController?.dimsBackgroundDuringPresentation = true
+        definesPresentationContext = true
+    }
     func configureCompleter() {
         completer.delegate = self
         completer.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 23.763081283843682, longitude: 120.99124358282349), latitudinalMeters: 100000, longitudinalMeters: 100000)
@@ -79,10 +97,11 @@ class FilterVC: UIViewController {
     
     func configureSearchBar() {
         searchBarView = PCLabelSearchView()
-        searchBarView.searchBar.isUserInteractionEnabled = false
+        
+        //searchBarView.searchBar.isUserInteractionEnabled = true
         contentView.addSubview(searchBarView)
         searchBarView.mapButton.addTarget(self, action: #selector(mapButtonTapped), for: .touchUpInside)
-        searchBarView.searchBar.searchTextField.delegate = self
+        //searchBarView.searchBar.searchTextField.delegate = self
         NSLayoutConstraint.activate([
             searchBarView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
             searchBarView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
@@ -162,24 +181,7 @@ class FilterVC: UIViewController {
         filterSectionView.moreButton.addTarget(self, action: #selector(filterMore), for: .touchUpInside)
         
     }
-    
-    func configureTableView() {
-        resultsTableView = UITableView()
-        resultsTableView.translatesAutoresizingMaskIntoConstraints = false
-        resultsTableView.delegate = self
-        resultsTableView.dataSource = self
-        resultsTableView.rowHeight = 50
-        resultsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "myIdentifier")
-        
-        view.addSubview(resultsTableView)
-        NSLayoutConstraint.activate([
-            resultsTableView.topAnchor.constraint(equalTo: searchBarView.bottomAnchor),
-            resultsTableView.leadingAnchor.constraint(equalTo: searchBarView.searchBar.leadingAnchor),
-            resultsTableView.trailingAnchor.constraint(equalTo: searchBarView.searchBar.trailingAnchor),
-            resultsTableView.heightAnchor.constraint(equalToConstant: 150)
-        ])
-    }
-    
+
     @objc func openTimeSelected (sender: PCFilterButton!) {
         if (!sender.isTapped) {
             presentPopUp(vc: PCOpeningHoursVC())
@@ -260,16 +262,16 @@ class FilterVC: UIViewController {
     }
     
     @objc func findTapped() {
-        if (searchBarView.searchBar.text == "") {
-            presentPCAlertOnMainThread(title: "未輸入地址!", message: "請輸入您想搜尋的範圍. 我們想幫您找到最適合您的咖啡廳! ☕", buttonTitle: "知道了")
-        } else {
-            let resultsVC = ResultsVC()
-            locationManager = CLLocationManager()
-            resultsVC.initialLocation = locationToSearch
-            configureQueryString()
-            resultsVC.queryString = queryString
-            navigationController?.pushViewController(resultsVC, animated: true)
-        }
+//        if (searchBarView.searchBar.text == "") {
+//            presentPCAlertOnMainThread(title: "未輸入地址!", message: "請輸入您想搜尋的範圍. 我們想幫您找到最適合您的咖啡廳! ☕", buttonTitle: "知道了")
+//        } else {
+//            let resultsVC = ResultsVC()
+//            locationManager = CLLocationManager()
+//            resultsVC.initialLocation = locationToSearch
+//            configureQueryString()
+//            resultsVC.queryString = queryString
+//            navigationController?.pushViewController(resultsVC, animated: true)
+//        }
     }
     
     func configureQueryString() {
@@ -304,18 +306,23 @@ class FilterVC: UIViewController {
 }
 
 extension FilterVC: UISearchTextFieldDelegate{
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        guard let query = textField.text else {
-            if completer.isSearching {
-                completer.cancel()
-            }
-            return
-        }
-        completer.queryFragment = query
-        DispatchQueue.main.async {
-            self.resultsTableView.reloadData()
-        }
-
+//    func textFieldDidChangeSelection(_ textField: UITextField) {
+//        guard let query = textField.text else {
+//            if completer.isSearching {
+//                completer.cancel()
+//            }
+//            return
+//        }
+//        completer.queryFragment = query
+//        DispatchQueue.main.async {
+//            self.resultsTableView.reloadData()
+//        }
+//
+//    }
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+//        let locationResultsSC = LocationResultsSearchController()
+//        navigationController?.pushViewController(locationResultsSC, animated: true)
+        return false
     }
 }
 

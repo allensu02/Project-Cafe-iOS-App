@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A3083986263D50D8004180A7 /* LocationResultsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3083985263D50D8004180A7 /* LocationResultsTVC.swift */; };
 		A31E4DBA25936AB70013BF02 /* Cafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E4DB925936AB70013BF02 /* Cafe.swift */; };
 		A31E4DBE2594C7490013BF02 /* PCAlertContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E4DBD2594C7490013BF02 /* PCAlertContainerView.swift */; };
 		A31E4DC32594C7840013BF02 /* PCAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31E4DC22594C7840013BF02 /* PCAlertVC.swift */; };
@@ -32,6 +33,7 @@
 		A35CC26F25935B2700542907 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35CC26E25935B2700542907 /* APIKeys.swift */; };
 		A35CC2732593647300542907 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35CC2722593647300542907 /* NetworkManager.swift */; };
 		A3650ACE25BF255F006C53CB /* PCCafeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3650ACD25BF255F006C53CB /* PCCafeCardView.swift */; };
+		A366428E2631C1D600F723F2 /* LocationResultsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A366428D2631C1D600F723F2 /* LocationResultsVC.swift */; };
 		A36AA25925DAB894007D4A6F /* PCOpenHoursView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36AA25825DAB894007D4A6F /* PCOpenHoursView.swift */; };
 		A37CCD3C25C2D72E00E2BBB0 /* PCDataLoadingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37CCD3B25C2D72E00E2BBB0 /* PCDataLoadingVC.swift */; };
 		A390847925A5C04800CEAFFC /* PCCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A390847825A5C04800CEAFFC /* PCCategoryCell.swift */; };
@@ -60,6 +62,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A3083985263D50D8004180A7 /* LocationResultsTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationResultsTVC.swift; sourceTree = "<group>"; };
 		A31E4DB925936AB70013BF02 /* Cafe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cafe.swift; sourceTree = "<group>"; };
 		A31E4DBD2594C7490013BF02 /* PCAlertContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCAlertContainerView.swift; sourceTree = "<group>"; };
 		A31E4DC22594C7840013BF02 /* PCAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCAlertVC.swift; sourceTree = "<group>"; };
@@ -90,6 +93,7 @@
 		A3614FE82590B23200A34A43 /* Merriweather-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Bold.ttf"; sourceTree = "<group>"; };
 		A3614FE92590B23200A34A43 /* Merriweather-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Light.ttf"; sourceTree = "<group>"; };
 		A3650ACD25BF255F006C53CB /* PCCafeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCCafeCardView.swift; sourceTree = "<group>"; };
+		A366428D2631C1D600F723F2 /* LocationResultsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationResultsVC.swift; sourceTree = "<group>"; };
 		A36AA25825DAB894007D4A6F /* PCOpenHoursView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCOpenHoursView.swift; sourceTree = "<group>"; };
 		A37CCD3B25C2D72E00E2BBB0 /* PCDataLoadingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCDataLoadingVC.swift; sourceTree = "<group>"; };
 		A390847825A5C04800CEAFFC /* PCCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCCategoryCell.swift; sourceTree = "<group>"; };
@@ -243,6 +247,8 @@
 			children = (
 				A3D56C542590A24E00E939B0 /* HomeVC.swift */,
 				A31EAD782592244400A72021 /* FilterVC.swift */,
+				A3083985263D50D8004180A7 /* LocationResultsTVC.swift */,
+				A366428D2631C1D600F723F2 /* LocationResultsVC.swift */,
 				A320AB9025B6DE740040D5B3 /* MapVC.swift */,
 				A34662EE25A596C000F68CAA /* EditCategoryVC.swift */,
 				A390847B25A5E6C800CEAFFC /* NewCategoryVC.swift */,
@@ -398,6 +404,7 @@
 				A320AB9125B6DE740040D5B3 /* MapVC.swift in Sources */,
 				A31EAD7E259224BC00A72021 /* PCTitleLabel.swift in Sources */,
 				A390848325A5E9D500CEAFFC /* PCTextField.swift in Sources */,
+				A366428E2631C1D600F723F2 /* LocationResultsVC.swift in Sources */,
 				A31E4DBE2594C7490013BF02 /* PCAlertContainerView.swift in Sources */,
 				A3B5F61125A8653B008B3D0C /* PCFilterButton.swift in Sources */,
 				A390847C25A5E6C800CEAFFC /* NewCategoryVC.swift in Sources */,
@@ -414,6 +421,7 @@
 				A347952025B5B92B009B8719 /* PCPriceVC.swift in Sources */,
 				A32D8E4C25C5CB100027137F /* PCCafeListCell.swift in Sources */,
 				A31EAD81259224EC00A72021 /* PCSecondaryLabel.swift in Sources */,
+				A3083986263D50D8004180A7 /* LocationResultsTVC.swift in Sources */,
 				A32D8E4825C5B9D50027137F /* ListResultsVC.swift in Sources */,
 				A335568925CD42FE002EDF7A /* PCIndividualTopView.swift in Sources */,
 				A353ECDD25FFABFC00D7786C /* PCAnnotationView.swift in Sources */,

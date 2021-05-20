@@ -86,7 +86,7 @@ class MapVC: UIViewController {
         print("ran confirmedtap")
         prevVC.locationToSearch = getCenterLocation(for: mapView)
         
-        prevVC.searchBarView.searchBar.searchTextField.text = label.text
+        //prevVC.searchBarView.searchBar.searchTextField.text = label.text
         navigationController?.popViewController(animated: true)
         print("ran dismissed")
     }

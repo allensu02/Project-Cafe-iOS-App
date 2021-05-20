@@ -31,7 +31,6 @@ class ResultsVC: PCDataLoadingVC {
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
         configureUI()
-        addCafes(location: initialLocation)
         
     }
     
@@ -41,6 +40,7 @@ class ResultsVC: PCDataLoadingVC {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.navigationBar.barTintColor = Colors.navyBlue
         title = "Results"
+        addCafes(location: initialLocation)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
